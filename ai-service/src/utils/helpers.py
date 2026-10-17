@@ -6,7 +6,7 @@ Provides response tag extraction, product resolution, and structured message for
 import os
 import re
 import logging
-from typing import Dict, Any, Optional, Tuple, List
+from typing import Dict, Any, Optional, List
 from src.ingestion.loader import loader
 
 # Setup logging to file and console

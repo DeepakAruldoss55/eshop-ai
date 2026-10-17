@@ -11,9 +11,7 @@ import {
   Menu,
   X,
   ChevronRight,
-  ShieldCheck,
   Briefcase,
-  Layers,
   CircleDot,
   Sparkles
 } from 'lucide-react';

@@ -4,13 +4,14 @@ FastAPI endpoints for customer chat, prompt suggestions, health checks, and cata
 Includes full access to customer accounts, order history, and active shipments.
 """
 
+import re
 from typing import List, Dict, Any, Optional
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from src.retrieval.retriever import retriever
 from src.prompts.prompt_templates import build_system_prompt
-from src.llm.llm_client import llm_client, LLM_PROVIDER, OPENAI_MODEL
+from src.llm.llm_client import llm_client
 from src.vectordb.vector_store import vector_store
 from src.utils.helpers import parse_llm_response, logger
 from src.ingestion.loader import loader
@@ -79,7 +80,6 @@ def chat_endpoint(req: ChatRequest):
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
 
     try:
-        import re
         q_lower = user_query.lower()
         explicit_ord_match = re.search(r"ORD-[0-9]{4}-[0-9]+", user_query, re.IGNORECASE)
         explicit_trk_match = re.search(r"TRK-[A-Z0-9-]+", user_query, re.IGNORECASE)

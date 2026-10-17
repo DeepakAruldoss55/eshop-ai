@@ -28,7 +28,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   cartTotal,
   onOpenCart,
   onOpenOrderHistory,
-  onNavigateAdmin,
   searchQuery,
   setSearchQuery,
   customers,

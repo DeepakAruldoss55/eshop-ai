@@ -8,7 +8,6 @@ import {
   Bot,
   Truck,
   Headphones,
-  ShoppingBag,
   ShieldCheck,
   ChevronRight,
   ExternalLink

@@ -8,7 +8,7 @@ Implements resilient multi-tier cloud LLM execution with automatic failover:
 
 import os
 import requests
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Optional
 from dotenv import load_dotenv
 
 ENV_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), ".env")

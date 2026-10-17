@@ -6,7 +6,7 @@ interface FooterProps {
   onNavigateAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigateAdmin }) => {
+export const Footer: React.FC<FooterProps> = () => {
   return (
     <footer className="mt-20 border-t border-slate-800/80 bg-slate-950 text-slate-400 text-xs">
       {/* Guarantees Bar */}

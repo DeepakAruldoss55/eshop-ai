@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import type { Customer, CustomerAddress } from '../../types';
 import { api } from '../../services/api';
 import { PaginationControls } from './PaginationControls';
-import { Search, UserCheck, Mail, Phone, Calendar, RefreshCw, MapPin, Download } from 'lucide-react';
+import { Search, UserCheck, Mail, Phone, RefreshCw, MapPin, Download } from 'lucide-react';
 
 export const AdminCustomersTable: React.FC = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);

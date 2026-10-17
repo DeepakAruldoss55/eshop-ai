@@ -5,17 +5,10 @@ import {
   TrendingUp,
   TrendingDown,
   DollarSign,
-  ShoppingCart,
   Users,
-  Package,
   Building2,
   Calculator,
-  ArrowRight,
-  PieChart,
-  Layers,
-  FileSpreadsheet,
-  CheckCircle2,
-  HelpCircle
+  PieChart
 } from 'lucide-react';
 
 interface AdminOverviewProps {
@@ -27,12 +20,10 @@ export const AdminOverview: React.FC<AdminOverviewProps> = ({ onSelectMenu }) =>
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadAll = async () => {
       try {
-        setLoading(true);
         const [ordersData, expensesData, productsData, customersData] = await Promise.all([
           api.getOrders(),
           api.getExpenses().then((res) => (Array.isArray(res) ? res : res.data)),
@@ -45,8 +36,6 @@ export const AdminOverview: React.FC<AdminOverviewProps> = ({ onSelectMenu }) =>
         setCustomers(customersData);
       } catch (err) {
         console.error('Failed to load overview data:', err);
-      } finally {
-        setLoading(false);
       }
     };
     loadAll();

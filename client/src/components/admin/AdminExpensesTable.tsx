@@ -6,7 +6,6 @@ import {
   Search,
   Plus,
   Trash2,
-  Calendar,
   FileSpreadsheet,
   AlertCircle,
   CheckCircle2,
@@ -16,7 +15,6 @@ import {
   RefreshCw,
   Eye,
   Download,
-  Filter,
   DollarSign
 } from 'lucide-react';
 

@@ -28,13 +28,11 @@ export const OrderHistoryModal: React.FC<OrderHistoryModalProps> = ({
   const [trackQuery, setTrackQuery] = React.useState('');
   const [trackedRecord, setTrackedRecord] = React.useState<ShippingRecord | null>(null);
   const [trackError, setTrackError] = React.useState('');
-  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (!isOpen) return;
 
     const fetchData = async () => {
-      setLoading(true);
       try {
         const [loadedOrders, loadedShipping] = await Promise.all([
           api.getOrders(),
@@ -44,8 +42,6 @@ export const OrderHistoryModal: React.FC<OrderHistoryModalProps> = ({
         setShippingRecords(loadedShipping);
       } catch (err) {
         console.error('Failed to load orders:', err);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -56,7 +52,6 @@ export const OrderHistoryModal: React.FC<OrderHistoryModalProps> = ({
     e.preventDefault();
     if (!trackQuery.trim()) return;
 
-    setLoading(true);
     setTrackError('');
     try {
       const match = await api.trackShipment(trackQuery.trim());
@@ -65,8 +60,6 @@ export const OrderHistoryModal: React.FC<OrderHistoryModalProps> = ({
     } catch (err) {
       setTrackError('No shipment found for this tracking number. Please verify code.');
       setTrackedRecord(null);
-    } finally {
-      setLoading(false);
     }
   };
 

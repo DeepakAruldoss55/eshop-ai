@@ -6,10 +6,15 @@ financial break-even diagnostics, and AI-powered business recommendations.
 """
 
 import math
-from datetime import datetime
+import re
+from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 from src.ingestion.loader import loader
-from src.llm.llm_client import llm_client
+
+
+def _utc_now_iso() -> str:
+    """Returns current UTC timestamp in ISO-8601 format."""
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 class AnalyticsEngine:
@@ -530,7 +535,7 @@ class AnalyticsEngine:
             })
 
         return {
-            "generatedAt": datetime.utcnow().isoformat() + "Z",
+            "generatedAt": _utc_now_iso(),
             "aiEngine": {
                 "status": "ACTIVE",
                 "recordsAnalyzed": {
@@ -660,7 +665,7 @@ class AnalyticsEngine:
         self,
         question: str,
         focus_area: Optional[str] = "general",
-        history: Optional[List[Dict[str, str]]] = None,
+        history: Optional[List[Dict[str, Any]]] = None,
         last_topic: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
@@ -684,6 +689,7 @@ class AnalyticsEngine:
         if q_clean in ("hi", "hai", "hello", "hey", "hola", "good morning", "good evening", "howdy"):
             return {
                 "question": question,
+                "topic": "greeting",
                 "focusArea": "greeting",
                 "answer": (
                     "Hello! I am your AI Business Copilot. I have full access to your orders, products, expenses, and customer accounts.\n\n"
@@ -693,7 +699,7 @@ class AnalyticsEngine:
                     "• Unsold Products & Discount Recommendations\n"
                     "• Customer Accounts & Order History"
                 ),
-                "generatedAt": datetime.utcnow().isoformat() + "Z",
+                "generatedAt": _utc_now_iso(),
             }
 
         q_low = question.lower()
@@ -701,8 +707,11 @@ class AnalyticsEngine:
         # Infer previous topic from history if last_topic wasn't explicitly set
         inferred_last_topic = last_topic
         if not inferred_last_topic and history:
-            for msg in reversed(history):
-                txt = str(msg.get("content", "")).lower()
+            history_items: List[Dict[str, Any]] = list(history)
+            for idx in range(len(history_items) - 1, -1, -1):
+                item = history_items[idx]
+                content_val = item["content"] if isinstance(item, dict) and "content" in item else ""
+                txt = str(content_val).lower()
                 if any(w in txt for w in ["pending", "processing", "awaiting dispatch"]):
                     inferred_last_topic = "pending_orders"
                     break
@@ -745,7 +754,6 @@ class AnalyticsEngine:
         )
 
         # Check if user asked about a specific Order Number (e.g., ORD-2026-8364)
-        import re
         ord_match = re.search(r"ord-[0-9]{4}-[0-9]+", q_low)
         if ord_match:
             target_ord_num = ord_match.group(0).upper()
@@ -756,12 +764,13 @@ class AnalyticsEngine:
             if matched_order:
                 return {
                     "question": question,
+                    "topic": "orders",
                     "focusArea": "orders",
                     "answer": (
                         f"Full Details for Order #{target_ord_num}:\n\n"
                         f"{self._format_order_detail(matched_order, 1)}"
                     ),
-                    "generatedAt": datetime.utcnow().isoformat() + "Z",
+                    "generatedAt": _utc_now_iso(),
                 }
 
         # Determine intent (with continuation support)
@@ -972,13 +981,13 @@ class AnalyticsEngine:
                     f"• Customer Activity: {overview['customerInsights']['activeCustomers']} of {overview['customerInsights']['totalCustomers']} customers active (96.3% revenue from Deepak Aruldoss)."
                 )
 
-        normalized_topic = intent.replace("_detailed", "")
+        normalized_topic = (intent or "general").replace("_detailed", "")
         return {
             "question": question,
             "topic": normalized_topic,
             "focusArea": normalized_topic,
             "answer": specific_answer,
-            "generatedAt": datetime.utcnow().isoformat() + "Z",
+            "generatedAt": _utc_now_iso(),
             "snapshotMetrics": {
                 "grossRevenue": kpis["grossRevenue"],
                 "netOperatingProfit": kpis["netOperatingProfit"],

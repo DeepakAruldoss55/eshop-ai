@@ -4,7 +4,6 @@ Can be executed to refresh embeddings when products or store policies change.
 """
 
 import os
-import sys
 from dotenv import load_dotenv
 
 ENV_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
