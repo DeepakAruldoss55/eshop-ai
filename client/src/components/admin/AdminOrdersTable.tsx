@@ -156,13 +156,19 @@ export const AdminOrdersTable: React.FC = () => {
     return filteredOrders.slice(start, start + pageSize);
   }, [filteredOrders, currentPage, pageSize]);
 
-  const totalRevenue = useMemo(() => {
-    return orders.reduce((acc, o) => acc + (Number(o.totalAmount) || 0), 0);
+  const validOrders = useMemo(() => {
+    return orders.filter((o) => String(o.status || '').toLowerCase() !== 'cancelled');
   }, [orders]);
 
+  const cancelledCount = orders.length - validOrders.length;
+
+  const totalRevenue = useMemo(() => {
+    return validOrders.reduce((acc, o) => acc + (Number(o.totalAmount) || 0), 0);
+  }, [validOrders]);
+
   const averageOrderValue = useMemo(() => {
-    return orders.length > 0 ? totalRevenue / orders.length : 0;
-  }, [orders, totalRevenue]);
+    return validOrders.length > 0 ? totalRevenue / validOrders.length : 0;
+  }, [validOrders, totalRevenue]);
 
   const exportToCSV = () => {
     if (orders.length === 0) return;
@@ -206,7 +212,9 @@ export const AdminOrdersTable: React.FC = () => {
             <div className="text-xl font-bold font-mono text-slate-900 mt-1">
               ${totalRevenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Commercial revenue invoiced</div>
+            <div className="text-[10px] text-slate-400 mt-0.5">
+              From {validOrders.length} active orders{cancelledCount > 0 ? ` (${cancelledCount} cancelled)` : ''}
+            </div>
           </div>
           <div className="w-9 h-9 rounded bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
             <DollarSign className="w-4 h-4" />
@@ -218,8 +226,12 @@ export const AdminOrdersTable: React.FC = () => {
             <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
               Sales Orders Invoiced
             </div>
-            <div className="text-xl font-bold font-mono text-slate-900 mt-1">{orders.length} Invoices</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Confirmed buyer bookings</div>
+            <div className="text-xl font-bold font-mono text-slate-900 mt-1">
+              {validOrders.length} Active
+            </div>
+            <div className="text-[10px] text-slate-400 mt-0.5">
+              {orders.length} total ({cancelledCount} cancelled)
+            </div>
           </div>
           <div className="w-9 h-9 rounded bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700">
             <FileText className="w-4 h-4" />
@@ -232,9 +244,9 @@ export const AdminOrdersTable: React.FC = () => {
               Average Order Value (AOV)
             </div>
             <div className="text-xl font-bold font-mono text-slate-900 mt-1">
-              ${averageOrderValue.toFixed(2)}
+              ${averageOrderValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Average revenue per invoice</div>
+            <div className="text-[10px] text-slate-400 mt-0.5">Average revenue per active order</div>
           </div>
           <div className="w-9 h-9 rounded bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-700">
             <ShoppingCart className="w-4 h-4" />

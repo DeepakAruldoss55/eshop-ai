@@ -815,11 +815,12 @@ class AnalyticsEngine:
                 self._format_order_detail(o, idx + 1) for idx, o in enumerate(pending_list)
             )
             pending_total = sum(float(o.get("totalAmount", 0.0)) for o in pending_list)
+            order_noun = "Order is" if len(pending_list) == 1 else f"All {len(pending_list)} orders are"
             specific_answer = (
-                f"You have {len(pending_list)} Pending / Processing Orders (Total Value: ${pending_total:,.2f}):\n\n"
+                f"You have {len(pending_list)} Pending / Processing {'Order' if len(pending_list) == 1 else 'Orders'} (Total Value: ${pending_total:,.2f}):\n\n"
                 f"{details_block}\n\n"
                 f"Next Step:\n"
-                f"Both orders are paid via UPI and ready at Fulfillment Center Hub 1 for dispatch to Chennai, Tamil Nadu."
+                f"{order_noun} paid and ready at Fulfillment Center Hub 1 for dispatch."
             )
 
         elif intent == "transit_orders":
@@ -849,11 +850,14 @@ class AnalyticsEngine:
             )
 
         elif intent in ("orders", "orders_detailed"):
+            valid_orders_list = [
+                o for o in all_orders if str(o.get("status", "")).lower() != "cancelled"
+            ]
             details_block = "\n\n".join(
-                self._format_order_detail(o, idx + 1) for idx, o in enumerate(all_orders)
+                self._format_order_detail(o, idx + 1) for idx, o in enumerate(valid_orders_list)
             )
             specific_answer = (
-                f"Complete Order Breakdown ({len(all_orders)} Total Orders — ${kpis['grossRevenue']:,.2f}):\n"
+                f"Complete Order Breakdown ({len(valid_orders_list)} Active Orders — ${kpis['grossRevenue']:,.2f}):\n"
                 f"• Processing (Pending Dispatch): {fm['processingCount']} orders\n"
                 f"• Shipped / On the Way: {fm['inTransitCount']} orders\n"
                 f"• Delivered: {fm['deliveredCount']} orders\n\n"
@@ -881,13 +885,13 @@ class AnalyticsEngine:
                 )
                 specific_answer = (
                     f"Profitability & Expense Breakdown:\n"
-                    f"• Current Sales Revenue: ${kpis['grossRevenue']:,.2f} (from {kpis['validOrders']} orders)\n"
+                    f"• Current Sales Revenue: ${kpis['grossRevenue']:,.2f} (from {kpis['validOrders']} active orders)\n"
                     f"• Total Operating Expenses: ${kpis['totalExpenses']:,.2f} (${kpis['paidExpenses']:,.2f} paid + ${kpis['pendingExpenses']:,.2f} scheduled)\n"
                     f"• Net Gap to Profit: -${abs(kpis['netOperatingProfit']):,.2f}\n\n"
                     f"Biggest Expense Categories:\n"
                     f"{exp_lines}\n\n"
                     f"How to Become Profitable This Cycle:\n"
-                    f"1. Get +{kpis['ordersNeededForBreakeven']} More Average Orders: Your average order is ${kpis['avgOrderValue']:,.2f}, so just {kpis['ordersNeededForBreakeven']} more orders will add +${kpis['avgOrderValue'] * kpis['ordersNeededForBreakeven']:,.2f} and put you in profit.\n"
+                    f"1. Get +{kpis['ordersNeededForBreakeven']} More Average Order: Your average order is ${kpis['avgOrderValue']:,.2f}, so just {kpis['ordersNeededForBreakeven']} more order will add +${kpis['avgOrderValue'] * kpis['ordersNeededForBreakeven']:,.2f} and put you in profit.\n"
                     f"2. Trim Fixed Overhead by 15%: Reducing Staff Salary ($8,900) and Warehouse Maintenance ($5,130) by 15% saves $2,104.50 immediately."
                 )
 
@@ -913,7 +917,10 @@ class AnalyticsEngine:
         elif intent in ("crm", "crm_detailed"):
             cust_blocks = []
             for c in custs:
-                c_orders = [o for o in all_orders if str(o.get("customerId", "")) == c["id"]]
+                c_orders = [
+                    o for o in all_orders
+                    if str(o.get("customerId", "")) == c["id"] and str(o.get("status", "")).lower() != "cancelled"
+                ]
                 ord_summary = (
                     "\n".join(
                         f"    - Order #{o.get('orderNumber')} ({str(o.get('createdAt', ''))[:10]}): ${float(o.get('totalAmount', 0)):,.2f} [{str(o.get('status', '')).upper()}] — "
@@ -921,7 +928,7 @@ class AnalyticsEngine:
                         for o in c_orders
                     )
                     if c_orders
-                    else "    - No orders placed yet ($0.00)"
+                    else "    - No active orders placed yet ($0.00)"
                 )
                 cust_blocks.append(
                     f"• {c['name']} ({c['id']}) — [{c['segment']}]\n"
@@ -939,9 +946,9 @@ class AnalyticsEngine:
             specific_answer = (
                 f"30-Day Store Growth Roadmap (Target: ${kpis['forecast30dRevenue']:,.2f} Revenue):\n\n"
                 f"• Week 1 (Fix Pricing & Catalog): Correct the $20 price on Apple iPhone 17 Pro Max and feature it on the homepage banner.\n"
-                f"• Week 2 (Clear Unsold Stock): Launch a 15% discount on the 7 zero-sale products (${kpis['lockedCapitalValuation']:,.0f} sitting in stock, led by NeoBook Pro 16 & Alpha One 8K Camera).\n"
+                f"• Week 2 (Clear Unsold Stock): Launch a 15% discount on the {len(slow_skus)} zero-sale products (${kpis['lockedCapitalValuation']:,.0f} sitting in stock, led by NeoBook Pro 16 & Alpha One 8K Camera).\n"
                 f"• Week 3 (Customer Activation): Email a 10% welcome code to inactive customer Sharvin S and a repeat-buyer offer to Sara S.\n"
-                f"• Week 4 (Profitability Milestone): Close the ${abs(kpis['netOperatingProfit']):,.2f} expense gap with 2+ new high-ticket orders and reach +$4,000+ net monthly profit."
+                f"• Week 4 (Profitability Milestone): Close the ${abs(kpis['netOperatingProfit']):,.2f} expense gap with {kpis['ordersNeededForBreakeven']}+ new high-ticket orders and reach +$4,000+ net monthly profit."
             )
 
         else:
@@ -966,19 +973,19 @@ class AnalyticsEngine:
                     f"{matched_prod['aiAdvice']}"
                 )
             else:
-                # Default to showing pending orders + store summary if they ask a general question
                 pending_list = [
                     o for o in all_orders if str(o.get("status", "")).lower() in ("processing", "pending")
                 ]
                 pending_summary = ", ".join(f"#{o.get('orderNumber')} (${float(o.get('totalAmount', 0)):,.2f})" for o in pending_list)
+                top_cust = custs[0] if custs else {"name": "N/A", "revenueSharePct": 0}
                 specific_answer = (
                     f"AI Store Summary:\n\n"
-                    f"• Sales & Orders: ${kpis['grossRevenue']:,.2f} across {kpis['validOrders']} orders (Avg Order: ${kpis['avgOrderValue']:,.2f})\n"
+                    f"• Sales & Orders: ${kpis['grossRevenue']:,.2f} across {kpis['validOrders']} active orders (Avg Order: ${kpis['avgOrderValue']:,.2f})\n"
                     f"• Pending Orders Awaiting Dispatch ({len(pending_list)}): {pending_summary}\n"
-                    f"• Profit vs. Expenses: -${abs(kpis['netOperatingProfit']):,.2f} net gap (${kpis['totalExpenses']:,.2f} total expenses) — need +{kpis['ordersNeededForBreakeven']} orders to break even.\n"
+                    f"• Profit vs. Expenses: -${abs(kpis['netOperatingProfit']):,.2f} net gap (${kpis['totalExpenses']:,.2f} total expenses) — need +{kpis['ordersNeededForBreakeven']} order to break even.\n"
                     f"• Best Seller: {top_skus[0]['title']} (${top_skus[0]['revenue']:,.2f} from {top_skus[0]['unitsSold']} units)\n"
                     f"• Unsold Inventory: {len(slow_skus)} products have 0 sales (${kpis['lockedCapitalValuation']:,.0f} in stock)\n"
-                    f"• Customer Activity: {overview['customerInsights']['activeCustomers']} of {overview['customerInsights']['totalCustomers']} customers active (96.3% revenue from Deepak Aruldoss)."
+                    f"• Customer Activity: {overview['customerInsights']['activeCustomers']} of {overview['customerInsights']['totalCustomers']} customers active ({top_cust['revenueSharePct']}% revenue from {top_cust['name']})."
                 )
 
         normalized_topic = (intent or "general").replace("_detailed", "")

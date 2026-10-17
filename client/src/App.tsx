@@ -12,7 +12,7 @@ import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ChatWidget } from './components/chat/ChatWidget';
 import type { Category, Product, Customer, CartItem, Order, ShippingRecord } from './types';
 import { api } from './services/api';
-import { SlidersHorizontal, Filter, CheckCircle2, AlertCircle } from 'lucide-react';
+import { SlidersHorizontal, Filter, CheckCircle2, AlertCircle, RotateCcw } from 'lucide-react';
 
 export function App() {
   // State
@@ -211,11 +211,11 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-slate-950">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col selection:bg-blue-600 selection:text-white">
       {/* Toast popup */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center space-x-2 px-4 py-3 rounded-2xl bg-slate-900 border border-emerald-500/40 text-emerald-400 shadow-2xl shadow-emerald-500/10 text-xs font-bold animate-bounce">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+        <div className="fixed bottom-6 left-6 z-50 flex items-center space-x-2.5 px-4 py-3 rounded-2xl bg-slate-900 text-white shadow-xl text-xs font-bold">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{toast.message}</span>
         </div>
       )}
@@ -253,34 +253,34 @@ export function App() {
         />
 
         {/* Products Catalog Section */}
-        <section ref={productSectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section ref={productSectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Section Heading & Controls Bar */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+          <div className="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center space-x-2">
-                <h2 className="text-2xl font-black text-white">Product Catalog</h2>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700">
-                  {filteredProducts.length} {filteredProducts.length === 1 ? 'item' : 'items'}
+              <div className="flex items-center space-x-2.5">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">Featured Catalog</h2>
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                  {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-1">
-                Authentic gear backed by official manufacturer warranty and fast dispatch
+              <p className="text-xs text-slate-500 mt-0.5">
+                Authentic flagship products with official warranty and tracked priority shipping
               </p>
             </div>
 
             {/* Filter and Sorting Controls */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2.5">
               {/* Category selector dropdown */}
-              <div className="flex items-center space-x-1.5 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs">
-                <Filter className="w-3.5 h-3.5 text-slate-400" />
+              <div className="flex items-center space-x-2 bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl px-3 py-2 text-xs transition-colors">
+                <Filter className="w-3.5 h-3.5 text-slate-500" />
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="bg-transparent text-slate-200 focus:outline-none cursor-pointer"
+                  className="bg-transparent text-slate-700 font-semibold focus:outline-none cursor-pointer"
                 >
-                  <option value="all" className="bg-slate-900">All Categories</option>
+                  <option value="all">All Departments</option>
                   {categories.map((c: Category) => (
-                    <option key={c.id} value={c.id} className="bg-slate-900">
+                    <option key={c.id} value={c.id}>
                       {c.name}
                     </option>
                   ))}
@@ -288,18 +288,18 @@ export function App() {
               </div>
 
               {/* Sorting dropdown */}
-              <div className="flex items-center space-x-1.5 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
+              <div className="flex items-center space-x-2 bg-slate-50 hover:bg-slate-100/80 border border-slate-200 rounded-xl px-3 py-2 text-xs transition-colors">
+                <SlidersHorizontal className="w-3.5 h-3.5 text-slate-500" />
                 <select
                   value={selectedSort}
                   onChange={(e) => setSelectedSort(e.target.value)}
-                  className="bg-transparent text-slate-200 focus:outline-none cursor-pointer"
+                  className="bg-transparent text-slate-700 font-semibold focus:outline-none cursor-pointer"
                 >
-                  <option value="featured" className="bg-slate-900">Featured First</option>
-                  <option value="price-low" className="bg-slate-900">Price: Low to High</option>
-                  <option value="price-high" className="bg-slate-900">Price: High to Low</option>
-                  <option value="rating" className="bg-slate-900">Highest Rated</option>
-                  <option value="newest" className="bg-slate-900">Newest Arrivals</option>
+                  <option value="featured">Sort: Featured First</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Customer Rating</option>
+                  <option value="newest">Newest Releases</option>
                 </select>
               </div>
 
@@ -311,9 +311,10 @@ export function App() {
                     setSelectedTag(null);
                     setSearchQuery('');
                   }}
-                  className="text-xs font-semibold text-rose-400 hover:text-rose-300 underline py-2"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 px-3 py-2 rounded-xl transition-colors cursor-pointer"
                 >
-                  Clear Filters
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Reset</span>
                 </button>
               )}
             </div>
@@ -322,28 +323,30 @@ export function App() {
           {/* Quick Tag Pills */}
           {allTags.length > 0 && (
             <div className="flex items-center space-x-2 py-4 overflow-x-auto scrollbar-none text-xs">
-              <span className="text-slate-500 font-semibold whitespace-nowrap">Filter Tags:</span>
+              <span className="text-slate-400 font-bold uppercase tracking-wider text-[11px] whitespace-nowrap mr-1">
+                Popular Tags:
+              </span>
               <button
                 onClick={() => setSelectedTag(null)}
-                className={`px-3 py-1 rounded-full whitespace-nowrap font-medium transition-colors ${
+                className={`px-3.5 py-1.5 rounded-full whitespace-nowrap font-semibold transition-all cursor-pointer ${
                   selectedTag === null
-                    ? 'bg-emerald-500 text-slate-950 font-bold'
-                    : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'bg-white text-slate-600 hover:text-blue-600 border border-slate-200 hover:border-blue-300'
                 }`}
               >
-                All
+                All Items
               </button>
               {allTags.map((tag: string) => (
                 <button
                   key={tag}
                   onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-                  className={`px-3 py-1 rounded-full whitespace-nowrap font-medium transition-colors ${
+                  className={`px-3.5 py-1.5 rounded-full whitespace-nowrap font-semibold transition-all cursor-pointer ${
                     selectedTag === tag
-                      ? 'bg-emerald-500 text-slate-950 font-bold'
-                      : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'bg-white text-slate-600 hover:text-blue-600 border border-slate-200 hover:border-blue-300'
                   }`}
                 >
-                  {tag}
+                  #{tag}
                 </button>
               ))}
             </div>
@@ -351,13 +354,13 @@ export function App() {
 
           {/* Product Grid */}
           {filteredProducts.length === 0 ? (
-            <div className="py-20 text-center flex flex-col items-center justify-center">
-              <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-500 mb-4">
-                <AlertCircle className="w-8 h-8 text-amber-400" />
+            <div className="py-16 my-4 bg-white rounded-3xl border border-slate-200/90 text-center flex flex-col items-center justify-center shadow-xs">
+              <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-500 mb-3">
+                <AlertCircle className="w-7 h-7" />
               </div>
-              <h3 className="text-lg font-bold text-white">No products found</h3>
-              <p className="text-xs text-slate-400 mt-1 max-w-sm">
-                No items match your current filter criteria. Try adjusting the category or search keyword.
+              <h3 className="text-lg font-extrabold text-slate-900">No matching products found</h3>
+              <p className="text-xs text-slate-500 mt-1 max-w-sm">
+                We couldn&apos;t find any items matching your current filter or search criteria.
               </p>
               <button
                 onClick={() => {
@@ -365,13 +368,13 @@ export function App() {
                   setSelectedTag(null);
                   setSearchQuery('');
                 }}
-                className="mt-4 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 text-xs font-bold transition-colors"
+                className="mt-4 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors shadow-sm cursor-pointer"
               >
-                Reset Catalog Filters
+                Reset All Filters
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-2">
               {filteredProducts.map((product: Product) => (
                 <ProductCard
                   key={product.id}

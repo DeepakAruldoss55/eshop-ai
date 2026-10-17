@@ -388,14 +388,15 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
       );
       const pendingTotal = pendingOrders.reduce((sum, o) => sum + Number(o.totalAmount || 0), 0);
       const detailsText = pendingOrders.map((o, idx) => formatSingleOrderDetail(o, idx + 1)).join('\n\n');
+      const orderNums = pendingOrders.map((o) => `#${o.orderNumber}`).join(', ') || 'None';
 
       return {
         resolvedTopic: 'pending_orders',
         answer:
-          `You have ${pendingOrders.length} Pending / Processing Orders Awaiting Dispatch (Total: $${pendingTotal.toFixed(2)}):\n\n` +
+          `You have ${pendingOrders.length} Pending / Processing ${pendingOrders.length === 1 ? 'Order' : 'Orders'} Awaiting Dispatch (Total: $${pendingTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}):\n\n` +
           `${detailsText}\n\n` +
           `Next Action:\n` +
-          `Both orders are paid via UPI and ready at Fulfillment Center Hub 1 for dispatch to Chennai, Tamil Nadu.`
+          `Pending ${pendingOrders.length === 1 ? 'order' : 'orders'} (${orderNums}) ${pendingOrders.length === 1 ? 'is' : 'are'} paid and queued at Main Warehouse & Hub for priority dispatch.`
       };
     }
 
@@ -437,7 +438,7 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
       return {
         resolvedTopic: 'orders',
         answer:
-          `Complete Order Breakdown (${allOrders.length} Total Orders — $${k.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })}):\n` +
+          `Complete Order Breakdown (${k.validOrders} Active Orders${k.cancelledOrders > 0 ? `, ${k.cancelledOrders} Cancelled` : ''} — $${k.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })}):\n` +
           `• Processing (Pending Dispatch): ${fm.processingCount} orders\n` +
           `• Shipped / On the Way: ${fm.inTransitCount} orders\n` +
           `• Delivered: ${fm.deliveredCount} orders\n\n` +
@@ -455,12 +456,12 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
         resolvedTopic: 'financial',
         answer:
           `Profitability & Expense Breakdown:\n` +
-          `• Current Sales Revenue: $${k.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })} (from ${k.validOrders} orders)\n` +
+          `• Invoiced Gross Sales: $${k.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })} (from ${k.validOrders} active orders)\n` +
           `• Total Operating Expenses: $${k.totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })} ($${k.paidExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })} paid + $${k.pendingExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })} scheduled)\n` +
-          `• Net Gap to Profit: -$${revGap.toLocaleString('en-US', { minimumFractionDigits: 2 })}\n\n` +
+          `• Net Operating Balance (EBIT): -$${revGap.toLocaleString('en-US', { minimumFractionDigits: 2 })} (${k.netOperatingMarginPct}% margin)\n\n` +
           `Expense Categories:\n${expLines}\n\n` +
           `How to Become Profitable This Cycle:\n` +
-          `1. Get +${neededOrders} More Average Orders: Your average order is $${k.avgOrderValue.toFixed(2)}, so just ${neededOrders} more orders will add +$${(k.avgOrderValue * neededOrders).toFixed(2)} and put your store into net profit.\n` +
+          `1. Get +${neededOrders} More Average Orders: Your average order is $${k.avgOrderValue.toFixed(2)}, so just ${neededOrders} more order(s) will add +$${(k.avgOrderValue * neededOrders).toFixed(2)} and put your store into net profit.\n` +
           `2. Trim Fixed Overhead by 15%: Reducing Staff Salary ($8,900) and Warehouse Maintenance ($5,130) by 15% saves $2,104.50 immediately.`
       };
     }
@@ -505,7 +506,7 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
           return (
             `• ${c.name} (${c.id}) — [${c.segment}]\n` +
             `  Email: ${c.email} | Phone: ${c.phone}\n` +
-            `  Total Spent: $${c.totalSpent.toLocaleString('en-US', { minimumFractionDigits: 2 })} (${c.revenueSharePct}% of sales) across ${c.ordersCount} orders\n` +
+            `  Total Spent: $${c.totalSpent.toLocaleString('en-US', { minimumFractionDigits: 2 })} (${c.revenueSharePct}% of sales) across ${c.ordersCount} active orders\n` +
             `  Orders:\n${ordText}\n` +
             `  AI Action: ${c.aiNextAction}`
           );
@@ -554,16 +555,21 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
       };
     }
 
+    const pendingOrdersList = allOrders.filter((o) =>
+      ['processing', 'pending'].includes(String(o.status || '').toLowerCase())
+    );
+    const pendingOrderNums = pendingOrdersList.map((o) => o.orderNumber).join(' & ') || 'None';
+
     return {
       resolvedTopic: 'general',
       answer:
         `AI Store Summary:\n\n` +
-        `• Sales & Orders: $${k.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })} across ${k.validOrders} orders (Avg Order: $${k.avgOrderValue.toFixed(2)})\n` +
-        `• Pending Orders Awaiting Dispatch: ${fm.processingCount} orders (ORD-2026-8364 & ORD-2026-7975)\n` +
-        `• Profit vs. Expenses: -$${revGap.toLocaleString('en-US', { minimumFractionDigits: 2 })} net gap ($${k.totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })} total expenses) — need +${neededOrders} orders to break even.\n` +
+        `• Sales & Orders: $${k.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })} across ${k.validOrders} active orders (Avg Order: $${k.avgOrderValue.toFixed(2)})\n` +
+        `• Pending Orders Awaiting Dispatch: ${fm.processingCount} ${fm.processingCount === 1 ? 'order' : 'orders'} (${pendingOrderNums})\n` +
+        `• Profit vs. Expenses: -$${revGap.toLocaleString('en-US', { minimumFractionDigits: 2 })} net gap ($${k.totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })} total expenses, ${k.netOperatingMarginPct}% margin) — need +${neededOrders} orders to break even.\n` +
         `• Best Seller: ${topSkus[0]?.title} ($${topSkus[0]?.revenue.toLocaleString('en-US', { minimumFractionDigits: 2 })} from ${topSkus[0]?.unitsSold} units)\n` +
         `• Unsold Inventory: ${slowSkus.length} products have 0 sales ($${k.lockedCapitalValuation.toLocaleString('en-US', { maximumFractionDigits: 0 })} in stock)\n` +
-        `• Customer Activity: ${overview.customerInsights.activeCustomers} of ${overview.customerInsights.totalCustomers} customers active (96.3% revenue from Deepak Aruldoss).`
+        `• Customer Activity: ${overview.customerInsights.activeCustomers} of ${overview.customerInsights.totalCustomers} customers active (${overview.customerInsights.topCustomerSharePct}% revenue from ${custs[0]?.name || 'Top Buyer'}).`
     };
   };
 
@@ -690,6 +696,11 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
   const ordersNeeded =
     kpis.ordersNeededForBreakeven ??
     (revenueGap > 0 && kpis.avgOrderValue > 0 ? Math.ceil(revenueGap / kpis.avgOrderValue) : 0);
+  const effectiveOrders: Order[] =
+    liveOrders.length > 0 ? liveOrders : (data.fulfillmentMetrics.ordersList as Order[]) || [];
+  const pendingOrdersAmount = effectiveOrders
+    .filter((o) => ['processing', 'pending'].includes(String(o.status || '').toLowerCase()))
+    .reduce((sum, o) => sum + Number(o.totalAmount || 0), 0);
   const topSeller = data.skuIntelligence.topPerformers[0] || {
     title: 'Horizon Curved 34-inch OLED Monitor',
     revenue: 11988,
@@ -697,7 +708,7 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
   };
   const topBuyer = data.customerInsights.leaderboard[0] || {
     name: 'Deepak Aruldoss',
-    totalSpent: 14235.3
+    totalSpent: 15860.01
   };
 
   const takeaways = data.aiNarrative?.keyTakeaways || [
@@ -731,9 +742,9 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
             confidencePct: 98,
             category: 'Profitability & Expenses',
             title: `Close the $${revenueGap.toLocaleString('en-US', { minimumFractionDigits: 2 })} Gap Between Sales and Expenses`,
-            metricBadge: `Need +${ordersNeeded || 2} Orders to Break Even`,
+            metricBadge: `Need +${ordersNeeded || 1} Orders to Break Even`,
             finding: `Total expenses ($${kpis.totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}) are currently higher than total sales ($${kpis.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })}). Your biggest cost is Staff Salary ($8,900.00).`,
-            action: `Promote high-ticket items (monitors, laptops, drones) to generate ${ordersNeeded || 2} more orders, and review recurring monthly costs ($${kpis.recurringExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}).`,
+            action: `Promote high-ticket items (monitors, laptops, drones) to generate ${ordersNeeded || 1} more orders, and review recurring monthly costs ($${kpis.recurringExpenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}).`,
             projectedImpact: `+$${revenueGap.toLocaleString('en-US', { maximumFractionDigits: 0 })} to reach profitability`
           },
           {
@@ -754,7 +765,7 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
             category: 'Unsold Warehouse Stock',
             title: `Turn ${data.skuIntelligence.slowMovers.length} Zero-Sale Products into Cash ($${kpis.lockedCapitalValuation.toLocaleString('en-US', { maximumFractionDigits: 0 })} in Stock)`,
             metricBadge: `${data.skuIntelligence.slowMovers.length} Products with 0 Sales`,
-            finding: `${data.skuIntelligence.slowMovers.length} out of ${kpis.totalSkusCount} products have not sold a single unit yet. Most money is tied up in NeoBook Pro 16 ($35,000) and Alpha One 8K Camera ($26,392).`,
+            finding: `${data.skuIntelligence.slowMovers.length} out of ${kpis.totalSkusCount} products have not sold a single unit yet. Most money is tied up in NeoBook Pro 16 ($34,182) and Alpha One 8K Camera ($26,392).`,
             action: 'Offer a 10%–15% discount or bundle unsold accessories with your best-selling Horizon 34" OLED Monitor and Spectra Mechanical Keyboard.',
             projectedImpact: '+$8,500 Est. New Sales from Idle Stock'
           },
@@ -831,7 +842,7 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
               </div>
               <div className="text-sm font-bold text-white mt-0.5">{healthScore.status}</div>
               <div className="text-[11px] text-slate-400 mt-1">
-                Analyzed across {aiEngine.recordsAnalyzed.orders} orders & {aiEngine.recordsAnalyzed.products} products
+                Analyzed across {kpis.validOrders} active orders & {aiEngine.recordsAnalyzed.products} products
               </div>
             </div>
           </div>
@@ -881,8 +892,8 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
               ${kpis.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
             <div className="text-xs text-slate-600 mt-1">
-              From <strong>{kpis.validOrders} orders</strong> ({kpis.totalUnitsSold} items sold • Avg Order:{' '}
-              <strong className="font-mono">${kpis.avgOrderValue.toFixed(0)}</strong>)
+              From <strong>{kpis.validOrders} active orders</strong> ({kpis.totalUnitsSold} items sold • Avg:{' '}
+              <strong className="font-mono">${kpis.avgOrderValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong>)
             </div>
           </div>
           <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
@@ -899,7 +910,7 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
         <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between text-xs font-bold text-slate-500 uppercase">
-              <span>2. Net Profit / Loss</span>
+              <span>2. Net Profit / Loss (EBIT)</span>
               {isProfitable ? (
                 <TrendingUp className="w-4 h-4 text-emerald-600" />
               ) : (
@@ -918,8 +929,9 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
               })}
             </div>
             <div className="text-xs text-slate-600 mt-1">
-              Sales (<strong className="font-mono">${kpis.grossRevenue.toFixed(0)}</strong>) minus Expenses (
-              <strong className="font-mono">${kpis.totalExpenses.toFixed(0)}</strong>)
+              Sales (<strong className="font-mono">${kpis.grossRevenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong>) minus Expenses (
+              <strong className="font-mono">${kpis.totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong>) •{' '}
+              <strong className="font-mono">{kpis.netOperatingMarginPct}%</strong>
             </div>
           </div>
           <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
@@ -928,7 +940,7 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
               AI Break-Even Goal:
             </span>
             <span className="font-mono font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-              Need +{ordersNeeded || 2} Orders
+              Need +{ordersNeeded || 1} Orders
             </span>
           </div>
         </div>
@@ -1159,7 +1171,13 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
                     >
                       <div className="text-[10px] font-bold uppercase text-amber-800">Pending Orders</div>
                       <div className="text-xs font-extrabold text-slate-900 mt-0.5">
-                        {data.fulfillmentMetrics.processingCount} Orders ($280.25)
+                        {data.fulfillmentMetrics.processingCount}{' '}
+                        {data.fulfillmentMetrics.processingCount === 1 ? 'Order' : 'Orders'} ($
+                        {pendingOrdersAmount.toLocaleString('en-US', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2
+                        })}
+                        )
                       </div>
                       <div className="text-[10px] text-amber-700 mt-0.5">Click for address & items →</div>
                     </button>
@@ -1191,7 +1209,7 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
                     >
                       <div className="text-[10px] font-bold uppercase text-rose-800">Profit vs. Expenses</div>
                       <div className="text-xs font-extrabold text-rose-600 mt-0.5">
-                        -${revenueGap.toLocaleString('en-US', { maximumFractionDigits: 0 })} Gap
+                        -${revenueGap.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Gap ({kpis.netOperatingMarginPct}%)
                       </div>
                       <div className="text-[10px] text-rose-700 mt-0.5">Need +{ordersNeeded} orders →</div>
                     </button>
@@ -1330,9 +1348,9 @@ export const AdminAIAnalytics: React.FC<AdminAIAnalyticsProps> = ({ onSelectMenu
                           Follow-up:
                         </span>
                         {[
-                          { label: 'Pending Orders (2)', q: 'Show full details of pending orders', area: 'pending_orders' },
-                          { label: 'In-Transit Orders (2)', q: 'Show details of shipped and in-transit orders', area: 'transit_orders' },
-                          { label: 'Delivered Orders (3)', q: 'Show details of delivered orders', area: 'delivered_orders' },
+                          { label: `Pending Orders (${data.fulfillmentMetrics.processingCount})`, q: 'Show full details of pending orders', area: 'pending_orders' },
+                          { label: `In-Transit Orders (${data.fulfillmentMetrics.inTransitCount})`, q: 'Show details of shipped and in-transit orders', area: 'transit_orders' },
+                          { label: `Delivered Orders (${data.fulfillmentMetrics.deliveredCount})`, q: 'Show details of delivered orders', area: 'delivered_orders' },
                           { label: 'Customer Profiles', q: 'Show our customer accounts and order history', area: 'crm' }
                         ].map((chip, i) => (
                           <button

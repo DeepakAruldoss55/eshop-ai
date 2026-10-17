@@ -1,5 +1,113 @@
 [
   {
+    "id": "order_c5ad9ea9",
+    "orderNumber": "ORD-2026-3267",
+    "customerId": "cust_001",
+    "customerName": "Deepak Aruldoss",
+    "customerEmail": "deepak.a@example.com",
+    "customerPhone": "+91 98765 43210",
+    "items": [
+      {
+        "productId": "prod_009",
+        "title": "SoundCore Horizon Hi-Res Speaker",
+        "price": 199.99,
+        "quantity": 1,
+        "image": "/images/products/speaker-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_001",
+      "customerId": "cust_001",
+      "type": "home",
+      "isDefault": true,
+      "fullName": "Deepak Aruldoss",
+      "phone": "+91 98765 43210",
+      "addressLine1": "42 Silicon Avenue, Tech Park",
+      "addressLine2": "Suite 404, Tower B",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "postalCode": "600096",
+      "country": "India"
+    },
+    "shippingMethod": {
+      "id": "ship_standard",
+      "name": "Standard Carbon-Neutral",
+      "description": "Eco-friendly ground delivery in 3-5 business days",
+      "cost": 0,
+      "estimatedDeliveryDays": "3-5 Days"
+    },
+    "subtotal": 199.99,
+    "shippingFee": 0,
+    "tax": 16,
+    "totalAmount": 215.99,
+    "status": "processing",
+    "paymentMethod": "upi",
+    "paymentStatus": "paid",
+    "createdAt": "2026-10-17T13:40:05.498Z",
+    "trackingNumber": "TRK-DPS-1893269"
+  },
+  {
+    "id": "order_61aed052",
+    "orderNumber": "ORD-2026-1043",
+    "customerId": "cust_001",
+    "customerName": "Deepak Aruldoss",
+    "customerEmail": "deepak.a@example.com",
+    "customerPhone": "+91 98765 43210",
+    "items": [
+      {
+        "productId": "prod_002",
+        "title": "Titan Precision Chrono Smartwatch",
+        "price": 499,
+        "quantity": 1,
+        "image": "/images/products/smartwatch-1.jpg"
+      },
+      {
+        "productId": "prod_003",
+        "title": "Lumix Infinity 4K Cinema Drone",
+        "price": 899,
+        "quantity": 1,
+        "image": "/images/products/drone-1.jpg"
+      },
+      {
+        "productId": "prod_006",
+        "title": "Spectra Mechanical Custom Keyboard",
+        "price": 169.5,
+        "quantity": 1,
+        "image": "/images/products/keyboard-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_002",
+      "customerId": "cust_001",
+      "type": "work",
+      "isDefault": false,
+      "fullName": "Deepak Aruldoss (Office)",
+      "phone": "+91 98765 43210",
+      "addressLine1": "AI Research Innovation Labs",
+      "addressLine2": "3rd Floor, Cyber City",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "postalCode": "600113",
+      "country": "India"
+    },
+    "shippingMethod": {
+      "id": "ship_overnight",
+      "name": "Overnight Air Courier",
+      "description": "Priority overnight dispatch arriving next morning by 10:30 AM",
+      "cost": 29,
+      "estimatedDeliveryDays": "Next Morning"
+    },
+    "subtotal": 1567.5,
+    "shippingFee": 29,
+    "tax": 125.4,
+    "totalAmount": 1721.9,
+    "status": "processing",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "createdAt": "2026-10-17T13:11:31.248Z",
+    "trackingNumber": "TRK-DPS-5091559"
+  },
+  {
     "id": "order_16dd99bf",
     "orderNumber": "ORD-2026-8364",
     "customerId": "cust_001",

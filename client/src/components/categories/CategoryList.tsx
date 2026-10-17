@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Category } from '../../types';
-import { Layers } from 'lucide-react';
+import { Layers, Sparkles } from 'lucide-react';
 
 interface CategoryListProps {
   categories: Category[];
@@ -14,43 +14,55 @@ export const CategoryList: React.FC<CategoryListProps> = ({
   onSelectCategory,
 }) => {
   return (
-    <section id="categories" className="px-4 sm:px-6 lg:px-8 py-6">
+    <section id="categories" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2">
-            <Layers className="w-5 h-5 text-emerald-400" />
-            <span>Featured Categories</span>
+          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-blue-600" />
+            <span>Shop by Department</span>
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-            Browse our handpicked collections engineered for performance and daily life
+          <p className="text-xs text-slate-500 mt-0.5">
+            Explore our curated product categories tailored for work, studio, and everyday lifestyle
           </p>
         </div>
 
         {selectedCategory !== 'all' && (
           <button
             onClick={() => onSelectCategory('all')}
-            className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 underline"
+            className="text-xs font-bold text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
           >
-            Show All Categories
+            View All Departments
           </button>
         )}
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
         {/* All Products Tile */}
         <button
           onClick={() => onSelectCategory('all')}
-          className={`flex flex-col items-center justify-center p-4 rounded-2xl border text-center transition-all duration-200 group ${
+          className={`flex flex-col items-center justify-center p-4 rounded-2xl border text-center transition-all duration-200 group cursor-pointer ${
             selectedCategory === 'all'
-              ? 'bg-emerald-500/15 border-emerald-500 text-emerald-400 shadow-lg shadow-emerald-500/10'
-              : 'bg-slate-900/70 border-slate-800 hover:border-slate-700 text-slate-300 hover:bg-slate-800/80'
+              ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-600/20'
+              : 'bg-white border-slate-200/90 hover:border-blue-300 text-slate-800 hover:shadow-md'
           }`}
         >
-          <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-            <Layers className="w-6 h-6 text-emerald-400" />
+          <div
+            className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-2.5 transition-transform group-hover:scale-105 ${
+              selectedCategory === 'all'
+                ? 'bg-white/20 text-white'
+                : 'bg-blue-50 text-blue-600'
+            }`}
+          >
+            <Layers className="w-6 h-6" />
           </div>
-          <span className="text-xs sm:text-sm font-bold">All Products</span>
-          <span className="text-[11px] text-slate-400 mt-0.5">Full Catalog</span>
+          <span className="text-xs sm:text-sm font-extrabold">All Products</span>
+          <span
+            className={`text-[11px] mt-0.5 ${
+              selectedCategory === 'all' ? 'text-blue-100' : 'text-slate-400'
+            }`}
+          >
+            Complete Catalog
+          </span>
         </button>
 
         {/* Categories mapped */}
@@ -60,26 +72,33 @@ export const CategoryList: React.FC<CategoryListProps> = ({
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
-              className={`relative overflow-hidden flex flex-col items-center p-3 rounded-2xl border text-center transition-all duration-200 group ${
+              className={`relative overflow-hidden flex flex-col items-center p-3.5 rounded-2xl border text-center transition-all duration-200 group cursor-pointer ${
                 isSelected
-                  ? 'bg-emerald-500/15 border-emerald-500 shadow-lg shadow-emerald-500/10'
-                  : 'bg-slate-900/70 border-slate-800 hover:border-slate-700 hover:bg-slate-800/80'
+                  ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-600/20'
+                  : 'bg-white border-slate-200/90 hover:border-blue-300 text-slate-800 hover:shadow-md'
               }`}
             >
-              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden mb-2 bg-slate-800">
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden mb-2.5 bg-slate-100 border border-slate-200/60 shadow-xs">
                 <img
                   src={cat.image}
                   alt={cat.name}
-                  className="w-full h-full object-cover object-center group-hover:scale-115 transition-transform duration-300"
+                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent"></div>
               </div>
 
-              <span className={`text-xs font-bold line-clamp-1 ${isSelected ? 'text-emerald-400' : 'text-slate-200'}`}>
+              <span
+                className={`text-xs sm:text-sm font-extrabold line-clamp-1 ${
+                  isSelected ? 'text-white' : 'text-slate-800 group-hover:text-blue-600'
+                }`}
+              >
                 {cat.name}
               </span>
 
-              <span className="text-[11px] text-slate-400 mt-0.5">
+              <span
+                className={`text-[11px] mt-0.5 font-medium ${
+                  isSelected ? 'text-blue-100' : 'text-slate-400'
+                }`}
+              >
                 {cat.productCount ?? 0} {cat.productCount === 1 ? 'item' : 'items'}
               </span>
             </button>

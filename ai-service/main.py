@@ -70,10 +70,12 @@ app.include_router(api_router)
 def root():
     return {
         "status": "online",
-        "service": "DeepShop AI Concierge RAG Chatbot API",
+        "service": "DeepShop AI Concierge & Merchant Analytics API",
         "endpoints": {
             "chat": "POST /api/chat",
             "suggestions": "GET /api/suggestions",
+            "analytics_overview": "GET /api/analytics/overview",
+            "analytics_ask": "POST /api/analytics/ask",
             "health": "GET /api/health",
             "ingest": "POST /api/ingest"
         }

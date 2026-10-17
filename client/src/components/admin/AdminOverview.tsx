@@ -41,13 +41,17 @@ export const AdminOverview: React.FC<AdminOverviewProps> = ({ onSelectMenu }) =>
     loadAll();
   }, []);
 
-  const totalRevenue = orders.reduce((acc, o) => acc + (Number(o.totalAmount) || 0), 0);
-  const totalExpenses = expenses.reduce((acc, e) => acc + (Number(e.amount) || 0), 0);
+  const validOrders = orders.filter((o) => String(o.status || '').toLowerCase() !== 'cancelled');
+  const cancelledOrders = orders.filter((o) => String(o.status || '').toLowerCase() === 'cancelled');
+  const validExpenses = expenses.filter((e) => String(e.status || '').toLowerCase() !== 'cancelled');
+
+  const totalRevenue = validOrders.reduce((acc, o) => acc + (Number(o.totalAmount) || 0), 0);
+  const totalExpenses = validExpenses.reduce((acc, e) => acc + (Number(e.amount) || 0), 0);
   const netIncome = totalRevenue - totalExpenses;
   const isProfitable = netIncome >= 0;
   const profitMargin = totalRevenue > 0 ? ((netIncome / totalRevenue) * 100).toFixed(1) : '0';
 
-  const expenseByCategory = expenses.reduce((acc, curr) => {
+  const expenseByCategory = validExpenses.reduce((acc, curr) => {
     acc[curr.category] = (acc[curr.category] || 0) + Number(curr.amount);
     return acc;
   }, {} as Record<string, number>);
@@ -65,7 +69,10 @@ export const AdminOverview: React.FC<AdminOverviewProps> = ({ onSelectMenu }) =>
             ${totalRevenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
           <div className="text-[11px] text-slate-500 mt-0.5">
-            From <span className="font-semibold text-slate-700">{orders.length}</span> customer transactions
+            From <span className="font-semibold text-slate-700">{validOrders.length} active orders</span>
+            {cancelledOrders.length > 0 && (
+              <span className="text-slate-400"> ({cancelledOrders.length} cancelled excluded)</span>
+            )}
           </div>
         </div>
 
@@ -78,7 +85,7 @@ export const AdminOverview: React.FC<AdminOverviewProps> = ({ onSelectMenu }) =>
             ${totalExpenses.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
           <div className="text-[11px] text-slate-500 mt-0.5">
-            Across <span className="font-semibold text-slate-700">{expenses.length}</span> posted entries
+            Across <span className="font-semibold text-slate-700">{validExpenses.length}</span> posted entries
           </div>
         </div>
 
@@ -144,10 +151,10 @@ export const AdminOverview: React.FC<AdminOverviewProps> = ({ onSelectMenu }) =>
               {/* Gross Sales */}
               <tr className="bg-emerald-50/30">
                 <td className="py-2.5 px-3 font-semibold text-slate-900 font-sans">
-                  Gross Commercial Sales Revenue (Orders Invoiced)
+                  Gross Commercial Sales Revenue (Active Orders Invoiced)
                 </td>
                 <td className="py-2.5 px-3 text-slate-500">REV-ORDERS</td>
-                <td className="py-2.5 px-3 text-center text-slate-700">{orders.length}</td>
+                <td className="py-2.5 px-3 text-center text-slate-700">{validOrders.length}</td>
                 <td className="py-2.5 px-3 text-right text-slate-400">—</td>
                 <td className="py-2.5 px-3 text-right font-bold text-emerald-700">
                   ${totalRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })}

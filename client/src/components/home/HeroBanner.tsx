@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles, ShieldCheck, Zap, Award } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Zap, Award, Star, Tag } from 'lucide-react';
 
 interface HeroBannerProps {
   onExploreClick: () => void;
@@ -11,127 +11,143 @@ interface HeroBannerProps {
 export const HeroBanner: React.FC<HeroBannerProps> = ({
   onExploreClick,
   productsCount,
+  categoriesCount,
 }) => {
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border border-slate-800 shadow-2xl my-6 mx-4 sm:mx-6 lg:mx-8">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        {/* Main Promotional Split Banner (8 cols) */}
+        <div className="lg:col-span-8 relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-slate-900 text-white shadow-xl shadow-blue-900/10 p-6 sm:p-10 flex flex-col justify-between min-h-[380px]">
+          {/* Subtle decorative light circles */}
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-16 w-72 h-72 bg-sky-400/20 rounded-full blur-2xl pointer-events-none" />
 
-      <div className="relative px-6 py-12 sm:px-12 sm:py-16 lg:py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
-        <div className="max-w-2xl text-center lg:text-left">
-          {/* Natural e-commerce promotional badge */}
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-6 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Spring Edition 2026</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-300">Curated Audio & Flagship Tech</span>
+          <div className="relative z-10 max-w-xl">
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-semibold mb-5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span>Season Flagship Showcase</span>
+              <span className="opacity-60">•</span>
+              <span className="text-sky-100">{categoriesCount} Curated Departments</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15]">
+              Next-Gen Tech & Everyday Essentials,{' '}
+              <span className="text-amber-300">Delivered Fast.</span>
+            </h1>
+
+            <p className="mt-4 text-sm sm:text-base text-blue-100 leading-relaxed max-w-lg">
+              Shop studio-grade acoustics, smart workspace gear, and flagship accessories backed by a 2-year official warranty and express doorstep delivery.
+            </p>
+
+            <div className="mt-7 flex flex-wrap items-center gap-3.5">
+              <button
+                onClick={onExploreClick}
+                className="flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-blue-700 font-extrabold text-sm shadow-lg shadow-slate-950/15 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              >
+                <span>Shop All Products ({productsCount})</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={onExploreClick}
+                className="flex items-center space-x-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/25 backdrop-blur-sm transition-all cursor-pointer"
+              >
+                <span>View Today&apos;s Deals</span>
+              </button>
+            </div>
           </div>
 
-          {/* Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Curated Tech & Gear for the{' '}
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
-              Modern Vanguard
-            </span>
-          </h1>
-
-          <p className="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl">
-            Discover next-generation electronics, high-fidelity studio acoustics, and smart wearables engineered for creators, innovators, and tastemakers.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <button
-              onClick={onExploreClick}
-              className="flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-200 transform hover:-translate-y-0.5"
-            >
-              <span>Shop All Products ({productsCount})</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={onExploreClick}
-              className="flex items-center space-x-2 px-5 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 text-slate-200 font-semibold text-sm border border-slate-700/80 hover:border-emerald-500/40 transition-all duration-200"
-            >
-              <span>Featured Arrivals</span>
-            </button>
-          </div>
-
-          {/* Feature Highlights */}
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 text-left">
+          {/* Bottom Trust Bar inside Main Hero */}
+          <div className="relative z-10 mt-8 pt-5 border-t border-white/15 grid grid-cols-3 gap-4">
             <div className="flex items-center space-x-2.5">
-              <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+              <div className="p-2 rounded-xl bg-white/15 text-amber-300">
                 <Zap className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-200">Express Delivery</p>
-                <p className="text-[11px] text-slate-400">Tracked priority dispatch</p>
+                <p className="text-xs font-bold text-white">Same-Day Dispatch</p>
+                <p className="text-[11px] text-blue-100 hidden sm:block">On in-stock orders</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-2.5">
-              <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+              <div className="p-2 rounded-xl bg-white/15 text-emerald-300">
                 <ShieldCheck className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-200">2-Year Warranty</p>
-                <p className="text-[11px] text-slate-400">Comprehensive coverage</p>
+                <p className="text-xs font-bold text-white">2-Year Protection</p>
+                <p className="text-[11px] text-blue-100 hidden sm:block">Full replacement cover</p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-2.5 col-span-2 sm:col-span-1">
-              <div className="p-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400">
+            <div className="flex items-center space-x-2.5">
+              <div className="p-2 rounded-xl bg-white/15 text-sky-200">
                 <Award className="w-4 h-4" />
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-200">100% Authentic</p>
-                <p className="text-[11px] text-slate-400">Verified manufacturer goods</p>
+                <p className="text-xs font-bold text-white">100% Authentic</p>
+                <p className="text-[11px] text-blue-100 hidden sm:block">Direct brand partner</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Hero Visual Card / Floating showcase */}
-        <div className="w-full lg:w-96 flex-shrink-0">
-          <div className="relative rounded-2xl p-5 bg-gradient-to-b from-slate-800/80 to-slate-900/90 border border-slate-700/80 shadow-2xl backdrop-blur-md">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-700/60 text-xs">
-              <span className="font-semibold text-emerald-400 flex items-center space-x-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>Editor's Pick</span>
+        {/* Right Side Spotlight Deal Card (4 cols) */}
+        <div className="lg:col-span-4 bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold">
+                <Tag className="w-3 h-3" />
+                <span>Spotlight Deal</span>
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-medium text-[10px]">
-                In Stock
+              <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                In Stock & Ready
               </span>
             </div>
 
-            <div className="relative mt-3 rounded-xl overflow-hidden aspect-[4/3] bg-slate-950 group">
+            <div
+              onClick={onExploreClick}
+              className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 group cursor-pointer border border-slate-100"
+            >
               <img
                 src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80"
-                alt="Aura Pro Headphones"
-                className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500"
+                alt="Aura Pro Studio Wireless"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute top-2 right-2 px-2 py-1 rounded-md bg-emerald-500 text-slate-950 font-extrabold text-xs">
-                BESTSELLER
+              <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-slate-900/85 backdrop-blur-sm text-white font-bold text-[11px]">
+                SAVE $50 TODAY
               </div>
             </div>
 
             <div className="mt-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-400">Premium Audio</span>
-                <span className="text-xs font-bold text-amber-400">★ 4.9 (248 reviews)</span>
-              </div>
-              <h2 className="text-base font-bold text-white mt-1">Aura Pro Studio Wireless</h2>
-              <div className="mt-3 flex items-center justify-between pt-3 border-t border-slate-800">
-                <div>
-                  <span className="text-xl font-extrabold text-white">$349.99</span>
-                  <span className="text-xs text-slate-500 line-through ml-2">$399.99</span>
-                </div>
-                <span className="text-xs text-emerald-400 font-medium bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">
-                  Ready to Ship
+              <div className="flex items-center justify-between text-xs text-slate-500">
+                <span className="font-semibold text-blue-600 uppercase tracking-wider text-[11px]">
+                  Flagship Audio
+                </span>
+                <span className="flex items-center gap-1 font-bold text-slate-700">
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  4.9 <span className="text-slate-400 font-normal">(248)</span>
                 </span>
               </div>
+              <h2 className="text-lg font-extrabold text-slate-900 mt-1">
+                Aura Pro Studio Wireless ANC
+              </h2>
+              <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                Lossless spatial acoustics with 45-hour adaptive battery life and ultra-plush memory foam ear cushions.
+              </p>
             </div>
+          </div>
+
+          <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <span className="text-xs text-slate-400 line-through block">$399.99</span>
+              <span className="text-2xl font-black text-slate-900">$349.99</span>
+            </div>
+            <button
+              onClick={onExploreClick}
+              className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition-colors cursor-pointer"
+            >
+              Explore Deal →
+            </button>
           </div>
         </div>
       </div>

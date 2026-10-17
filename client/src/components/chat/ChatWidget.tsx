@@ -106,7 +106,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
     }
   }, [isOpen, messages, isTyping]);
 
-  // Dismiss teaser after 10 seconds if not clicked
+  // Dismiss teaser after 12 seconds if not clicked
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowTeaser(false);
@@ -268,7 +268,6 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
       setMessages((prev) => [...prev, botMessage]);
     } catch (err) {
       console.warn('[AI Chatbot] Backend unavailable, using smart client fallback:', err);
-      // Graceful fallback to client-side heuristics if AI service is temporarily connecting
       const replyData = generateBotReply(userMessage.text);
       const botMessage: Message = {
         id: `m_bot_${Date.now()}`,
@@ -301,13 +300,13 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
       {!isOpen && showTeaser && (
         <div
           onClick={() => setIsOpen(true)}
-          className="absolute bottom-16 right-0 mb-2 w-64 p-3 bg-slate-900/95 border border-slate-700/80 rounded-2xl shadow-2xl backdrop-blur-md cursor-pointer transition-all hover:scale-[1.02] animate-in fade-in slide-in-from-bottom-2 group"
+          className="absolute bottom-16 right-0 mb-2 w-64 p-3.5 bg-white border border-slate-200 rounded-2xl shadow-xl cursor-pointer transition-all hover:scale-[1.02] group"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">
-                DeepShop Assistant
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              <span className="text-[11px] font-extrabold text-blue-600 uppercase tracking-wider">
+                DeepShop Concierge
               </span>
             </div>
             <button
@@ -315,25 +314,25 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
                 e.stopPropagation();
                 setShowTeaser(false);
               }}
-              className="text-slate-400 hover:text-white p-0.5 rounded"
+              className="text-slate-400 hover:text-slate-700 p-0.5 rounded"
             >
               <X className="w-3 h-3" />
             </button>
           </div>
-          <p className="text-xs text-slate-200 mt-1.5 leading-snug">
+          <p className="text-xs text-slate-600 mt-1.5 leading-snug">
             👋 Have questions about products, shipping, or tracking your order? Tap to chat!
           </p>
-          <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-slate-900 border-r border-b border-slate-700 transform rotate-45" />
+          <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white border-r border-b border-slate-200 transform rotate-45" />
         </div>
       )}
 
       {/* Main Floating Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`relative group flex items-center justify-center p-3.5 rounded-full shadow-2xl transition-all duration-300 transform active:scale-95 ${
+        className={`relative group flex items-center justify-center p-4 rounded-full shadow-xl transition-all duration-300 transform active:scale-95 cursor-pointer ${
           isOpen
-            ? 'bg-slate-800 text-white border border-slate-600 hover:bg-slate-700 rotate-90'
-            : 'bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 font-bold hover:shadow-cyan-500/25 hover:shadow-xl hover:scale-105'
+            ? 'bg-slate-900 text-white hover:bg-slate-800 rotate-90'
+            : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold hover:shadow-blue-600/30 hover:shadow-2xl hover:scale-105'
         }`}
         aria-label="Toggle Support Chat"
         id="chatbot-trigger-btn"
@@ -342,11 +341,11 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
           <X className="w-6 h-6 transition-transform" />
         ) : (
           <>
-            <MessageSquare className="w-6 h-6 fill-slate-950/20" />
+            <MessageSquare className="w-6 h-6 fill-white/15" />
             {hasUnread && (
               <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-cyan-400 border-2 border-slate-950" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white" />
               </span>
             )}
           </>
@@ -356,29 +355,29 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
       {/* Chat Window Panel */}
       {isOpen && (
         <div
-          className="fixed bottom-24 right-4 sm:right-6 w-[calc(100vw-32px)] sm:w-[400px] h-[550px] max-h-[calc(100vh-120px)] bg-slate-900/95 backdrop-blur-2xl border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden flex flex-col ring-1 ring-white/10 animate-in fade-in slide-in-from-bottom-5 duration-200 z-50"
+          className="fixed bottom-24 right-4 sm:right-6 w-[calc(100vw-32px)] sm:w-[400px] h-[550px] max-h-[calc(100vh-120px)] bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden flex flex-col z-50"
           id="chatbot-window"
         >
           {/* Header */}
-          <div className="px-4 py-3.5 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between">
+          <div className="px-4 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-500/20 via-cyan-500/30 to-blue-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shadow-inner">
+                <div className="w-10 h-10 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center text-white shadow-inner">
                   <Bot className="w-5 h-5" />
                 </div>
-                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-slate-950" />
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-blue-600" />
               </div>
               <div>
                 <div className="flex items-center space-x-1.5">
-                  <h3 className="text-sm font-bold text-white tracking-tight">DeepShop Concierge</h3>
-                  <span className="px-1.5 py-0.2 rounded text-[9px] font-extrabold uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                  <h3 className="text-sm font-extrabold text-white tracking-tight">DeepShop Concierge</h3>
+                  <span className="px-1.5 py-0.5 rounded text-[9px] font-extrabold uppercase bg-white/20 text-white">
                     AI Active
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-400 flex items-center space-x-1">
+                <p className="text-[11px] text-blue-100 flex items-center space-x-1">
                   <span>Always ready to assist</span>
                   <span>•</span>
-                  <span className="text-emerald-400">Online</span>
+                  <span className="text-emerald-300 font-semibold">Online</span>
                 </p>
               </div>
             </div>
@@ -387,7 +386,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
               <button
                 onClick={handleReset}
                 title="Restart conversation"
-                className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-xl transition-colors"
+                className="p-1.5 text-blue-100 hover:text-white hover:bg-white/15 rounded-xl transition-colors cursor-pointer"
                 id="chatbot-reset-btn"
               >
                 <RotateCcw className="w-4 h-4" />
@@ -395,7 +394,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
               <button
                 onClick={() => setIsOpen(false)}
                 title="Close chat"
-                className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors"
+                className="p-1.5 text-blue-100 hover:text-white hover:bg-white/15 rounded-xl transition-colors cursor-pointer"
                 id="chatbot-close-btn"
               >
                 <X className="w-4 h-4" />
@@ -404,7 +403,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
           </div>
 
           {/* Messages Feed */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3.5 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-slate-50/70">
             {messages.map((msg) => {
               const isUser = msg.sender === 'user';
               return (
@@ -413,31 +412,31 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
                   className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
                 >
                   <div
-                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed shadow-sm ${
+                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed shadow-2xs ${
                       isUser
-                        ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-semibold rounded-br-xs'
-                        : 'bg-slate-800/90 border border-slate-700/70 text-slate-200 rounded-bl-xs'
+                        ? 'bg-blue-600 text-white font-medium rounded-br-xs'
+                        : 'bg-white border border-slate-200 text-slate-800 rounded-bl-xs'
                     }`}
                   >
                     <p className="whitespace-pre-line">{msg.text}</p>
 
                     {/* Interactive Embedded Product Card */}
                     {msg.suggestedProduct && (
-                      <div className="mt-2.5 p-2 bg-slate-950/70 border border-slate-700/80 rounded-xl flex items-center space-x-2.5 overflow-hidden">
+                      <div className="mt-2.5 p-2.5 bg-slate-50 border border-slate-200 rounded-xl flex items-center space-x-2.5 overflow-hidden">
                         <img
                           src={msg.suggestedProduct.images?.[0] || (msg.suggestedProduct as any).image || '/images/products/placeholder.jpg'}
                           alt={msg.suggestedProduct.title}
-                          className="w-12 h-12 rounded-lg object-cover shrink-0 bg-slate-900 border border-slate-800"
+                          className="w-12 h-12 rounded-lg object-cover shrink-0 bg-white border border-slate-200"
                         />
                         <div className="flex-1 min-w-0">
-                          <h5 className="text-[11px] font-bold text-white truncate">
+                          <h5 className="text-[11px] font-extrabold text-slate-900 truncate">
                             {msg.suggestedProduct.title}
                           </h5>
                           <div className="flex items-center space-x-1.5 mt-0.5">
-                            <span className="text-xs font-mono font-bold text-emerald-400">
+                            <span className="text-xs font-mono font-black text-blue-600">
                               ${Number(msg.suggestedProduct.price).toFixed(2)}
                             </span>
-                            <span className="text-[10px] text-slate-400">
+                            <span className="text-[10px] text-amber-500 font-bold">
                               ★ {msg.suggestedProduct.rating || '4.8'}
                             </span>
                           </div>
@@ -445,7 +444,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
                         {onQuickViewProduct && (
                           <button
                             onClick={() => onQuickViewProduct(msg.suggestedProduct!)}
-                            className="p-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[10px] font-bold shrink-0 transition-colors"
+                            className="p-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 text-[10px] font-bold shrink-0 transition-colors cursor-pointer"
                             title="Quick View"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
@@ -456,10 +455,10 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
 
                     {/* Interactive Action Button */}
                     {msg.action && (
-                      <div className="mt-2.5 pt-2 border-t border-slate-700/50">
+                      <div className="mt-2.5 pt-2 border-t border-slate-100">
                         <button
                           onClick={() => handleActionClick(msg.action)}
-                          className="w-full flex items-center justify-center space-x-1.5 py-1.5 px-3 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 text-[11px] font-bold transition-colors"
+                          className="w-full flex items-center justify-center space-x-1.5 py-2 px-3 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 text-[11px] font-bold transition-colors cursor-pointer"
                         >
                           <span>{msg.action.label}</span>
                           <ChevronRight className="w-3.5 h-3.5" />
@@ -468,7 +467,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
                     )}
                   </div>
 
-                  <span className="text-[10px] text-slate-500 mt-1 px-1">
+                  <span className="text-[10px] text-slate-400 mt-1 px-1">
                     {msg.timestamp}
                   </span>
                 </div>
@@ -478,13 +477,13 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
             {/* Typing Indicator */}
             {isTyping && (
               <div className="flex items-center space-x-2">
-                <div className="w-7 h-7 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-cyan-400">
+                <div className="w-7 h-7 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
                   <Bot className="w-3.5 h-3.5" />
                 </div>
-                <div className="bg-slate-800 border border-slate-700/70 rounded-2xl rounded-bl-xs px-3.5 py-2.5 flex items-center space-x-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:-0.3s]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce [animation-delay:-0.15s]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce" />
+                <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-xs px-3.5 py-2.5 flex items-center space-x-1.5 shadow-2xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-bounce [animation-delay:-0.3s]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-bounce [animation-delay:-0.15s]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-bounce" />
                 </div>
               </div>
             )}
@@ -494,8 +493,8 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
 
           {/* Quick Suggestion Chips (when only greetings exist) */}
           {messages.length <= 3 && !isTyping && (
-            <div className="px-4 py-2 border-t border-slate-800/80 bg-slate-950/40">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+            <div className="px-4 py-2.5 border-t border-slate-200 bg-white">
+              <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-1.5">
                 Popular Inquiries:
               </div>
               <div className="flex flex-wrap gap-1.5">
@@ -505,9 +504,9 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
                     <button
                       key={i}
                       onClick={() => handleSend(p.query)}
-                      className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-700/70 text-slate-300 hover:text-white text-[11px] transition-colors"
+                      className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-slate-700 hover:text-blue-700 text-[11px] font-medium transition-colors cursor-pointer"
                     >
-                      <Icon className="w-3 h-3 text-cyan-400" />
+                      <Icon className="w-3 h-3 text-blue-600" />
                       <span>{p.label}</span>
                     </button>
                   );
@@ -522,7 +521,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
               e.preventDefault();
               handleSend();
             }}
-            className="p-3 bg-slate-950 border-t border-slate-800 flex items-center space-x-2"
+            className="p-3 bg-white border-t border-slate-200 flex items-center space-x-2"
           >
             <input
               ref={inputRef}
@@ -530,13 +529,13 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask about products, orders, shipping..."
-              className="flex-1 px-3.5 py-2 text-xs bg-slate-900 border border-slate-700/80 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+              className="flex-1 px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-500/15 transition-all"
               id="chatbot-input-field"
             />
             <button
               type="submit"
               disabled={!inputValue.trim() || isTyping}
-              className="p-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold hover:opacity-90 disabled:opacity-40 transition-opacity shadow-md"
+              className="p-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold disabled:opacity-40 transition-colors shadow-sm cursor-pointer"
               title="Send message"
               id="chatbot-send-btn"
             >
