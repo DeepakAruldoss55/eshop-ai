@@ -26,13 +26,9 @@ OPENROUTER_BASE_URL = os.getenv("OPENROUTER_BASE_URL", "https://openrouter.ai/ap
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "qwen/qwen-2.5-7b-instruct:free")
 
-# Ollama settings
-OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen2.5:1.5b")
-
 class LLMClient:
     def __init__(self):
-        self._local_pipe = None
+        self._session = requests.Session()
 
     def _call_groq_or_openai(
         self,
@@ -84,7 +80,7 @@ class LLMClient:
                     "frequency_penalty": 0.2,
                     "max_tokens": 450
                 }
-                res = requests.post(url, json=payload, headers=headers, timeout=10)
+                res = self._session.post(url, json=payload, headers=headers, timeout=10)
                 if res.status_code == 200:
                     data = res.json()
                     choices = data.get("choices", [])
