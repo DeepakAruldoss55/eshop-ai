@@ -26,6 +26,14 @@ logs/
 **/logs/*.log
 *.log
 
+# Environment variables (keep .env.example tracked)
+.env
+.env.local
+**/.env
+**/.env.local
+!.env.example
+!**/.env.example
+
 # IDE & OS files
 .vscode/*
 !.vscode/settings.json

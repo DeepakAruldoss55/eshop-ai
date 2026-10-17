@@ -6,6 +6,11 @@ cd "$DIR"
 
 echo "⚡ [AI-Service] Checking Python environment in $DIR..."
 
+# Create .env from .env.example if missing on fresh clone
+if [ ! -f "$DIR/.env" ] && [ -f "$DIR/.env.example" ]; then
+    cp "$DIR/.env.example" "$DIR/.env"
+fi
+
 # Verify or create virtual environment
 if [ ! -d "$DIR/venv" ]; then
     echo "📦 [AI-Service] Virtual environment not found. Initializing venv..."
