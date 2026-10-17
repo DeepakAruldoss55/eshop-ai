@@ -21,4 +21,5 @@ if [ ! -f "$DIR/venv/bin/uvicorn" ]; then
 fi
 
 echo "🚀 [AI-Service] Launching FastAPI RAG backend on http://localhost:8000..."
-exec "$DIR/venv/bin/python" -m uvicorn main:app --host 0.0.0.0 --port 8000 --workers 1
+exec "$DIR/venv/bin/python" -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+

@@ -478,7 +478,7 @@ export const AdminOrdersTable: React.FC = () => {
                         <button
                           onClick={() => setViewingOrder(order)}
                           className="p-1 rounded text-slate-500 hover:text-blue-600 hover:bg-slate-100 transition-colors"
-                          title="View Order Voucher"
+                          title="View Sales Invoice"
                         >
                           <Eye className="w-3.5 h-3.5" />
                         </button>
@@ -693,7 +693,7 @@ export const AdminOrdersTable: React.FC = () => {
                 onClick={() => setViewingOrder(null)}
                 className="px-3 py-1 rounded bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-semibold"
               >
-                Close Voucher
+                Close
               </button>
             </div>
           </div>

@@ -14,7 +14,8 @@ import {
   ShieldCheck,
   Briefcase,
   Layers,
-  CircleDot
+  CircleDot,
+  Sparkles
 } from 'lucide-react';
 import { AdminOverview } from './AdminOverview';
 import { AdminExpensesTable } from './AdminExpensesTable';
@@ -22,9 +23,10 @@ import { AdminCategoriesTable } from './AdminCategoriesTable';
 import { AdminProductsTable } from './AdminProductsTable';
 import { AdminCustomersTable } from './AdminCustomersTable';
 import { AdminOrdersTable } from './AdminOrdersTable';
+import { AdminAIAnalytics } from './AdminAIAnalytics';
 import { api } from '../../services/api';
 
-export type AdminMenuTab = 'overview' | 'expenses' | 'categories' | 'products' | 'customers' | 'orders';
+export type AdminMenuTab = 'overview' | 'expenses' | 'categories' | 'products' | 'customers' | 'ai_analytics' | 'orders';
 
 interface AdminDashboardProps {
   onNavigateHome: () => void;
@@ -33,7 +35,7 @@ interface AdminDashboardProps {
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   onNavigateHome,
-  initialTab = 'expenses'
+  initialTab = 'overview'
 }) => {
   const [activeTab, setActiveTab] = useState<AdminMenuTab>(initialTab);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -62,48 +64,48 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   const menuSections = [
     {
-      sectionTitle: 'FINANCIAL MANAGEMENT',
+      sectionTitle: 'OVERVIEW & AI ANALYTICS',
       items: [
         {
           id: 'overview' as AdminMenuTab,
           label: 'P&L Statement & Executive KPI',
           icon: BarChart3,
-          code: 'FIN-01',
+          code: 'OVW-01',
           description: 'Revenue, Expense Ledger & Margins'
         },
         {
-          id: 'expenses' as AdminMenuTab,
-          label: 'Operating Expenses Ledger',
-          icon: Receipt,
-          badge: expenseCount,
-          code: 'FIN-02',
-          description: 'Warehouse, Payroll & Utilities'
+          id: 'ai_analytics' as AdminMenuTab,
+          label: 'AI Analytics & Statistics',
+          icon: Sparkles,
+          badge: 'AI',
+          code: 'AI-01',
+          description: 'Business Performance & Insights'
         }
       ]
     },
     {
-      sectionTitle: 'INVENTORY & MERCHANDISE',
+      sectionTitle: 'CATALOG & INVENTORY',
       items: [
-        {
-          id: 'products' as AdminMenuTab,
-          label: 'Product Master & SKUs',
-          icon: Package,
-          badge: productCount,
-          code: 'INV-01',
-          description: 'Catalog & Stock Valuation'
-        },
         {
           id: 'categories' as AdminMenuTab,
           label: 'Categories & Departments',
           icon: FolderTree,
           badge: categoryCount,
-          code: 'INV-02',
+          code: 'CAT-01',
           description: 'Product Classification'
+        },
+        {
+          id: 'products' as AdminMenuTab,
+          label: 'Product Master & SKUs',
+          icon: Package,
+          badge: productCount,
+          code: 'PRD-01',
+          description: 'Catalog & Stock Valuation'
         }
       ]
     },
     {
-      sectionTitle: 'COMMERCE & FULFILLMENT',
+      sectionTitle: 'SALES & CRM',
       items: [
         {
           id: 'orders' as AdminMenuTab,
@@ -122,23 +124,38 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           description: 'Buyer Master Directory'
         }
       ]
+    },
+    {
+      sectionTitle: 'FINANCIAL MANAGEMENT',
+      items: [
+        {
+          id: 'expenses' as AdminMenuTab,
+          label: 'Operating Expenses Ledger',
+          icon: Receipt,
+          badge: expenseCount,
+          code: 'FIN-01',
+          description: 'Warehouse, Payroll & Utilities'
+        }
+      ]
     }
   ];
 
   const getBreadcrumb = () => {
     switch (activeTab) {
       case 'overview':
-        return { module: 'Financial Management', page: 'P&L Statement & Executive Summary' };
+        return { module: 'Overview & AI Analytics', page: 'P&L Statement & Executive Summary' };
+      case 'ai_analytics':
+        return { module: 'Overview & AI Analytics', page: 'AI Analytics, Statistics & Business Performance' };
+      case 'categories':
+        return { module: 'Catalog & Inventory', page: 'Categories & Departments' };
+      case 'products':
+        return { module: 'Catalog & Inventory', page: 'Product Master & SKUs' };
+      case 'orders':
+        return { module: 'Sales & CRM', page: 'Sales Orders & Invoices' };
+      case 'customers':
+        return { module: 'Sales & CRM', page: 'Customer Accounts (CRM)' };
       case 'expenses':
         return { module: 'Financial Management', page: 'Operating Expenses Ledger (Warehouse & Payroll)' };
-      case 'categories':
-        return { module: 'Inventory Management', page: 'Category Departments' };
-      case 'products':
-        return { module: 'Inventory Management', page: 'Product Master & Stock' };
-      case 'customers':
-        return { module: 'Commerce & CRM', page: 'Customer Accounts Master' };
-      case 'orders':
-        return { module: 'Commerce & Orders', page: 'Sales Orders & Invoices' };
     }
   };
 
@@ -323,6 +340,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           )}
 
           {activeTab === 'customers' && <AdminCustomersTable />}
+
+          {activeTab === 'ai_analytics' && (
+            <AdminAIAnalytics onSelectMenu={(tab) => setActiveTab(tab)} />
+          )}
 
           {activeTab === 'orders' && <AdminOrdersTable />}
         </main>

@@ -15,8 +15,9 @@ from src.vectordb.vector_store import vector_store
 from src.utils.helpers import parse_llm_response, logger
 from src.ingestion.loader import loader
 from src.chunking.chunker import chunker
+from src.analytics.engine import analytics_engine
 
-router = APIRouter(prefix="/api", tags=["Chatbot RAG API"])
+router = APIRouter(prefix="/api", tags=["Chatbot & Merchant AI Analytics API"])
 
 class ChatMessage(BaseModel):
     role: str
@@ -40,8 +41,6 @@ class HealthResponse(BaseModel):
     status: str
     service: str
     chunks_indexed: int
-    provider: str
-    model: str
 
 @router.get("/health", response_model=HealthResponse)
 def health_check():
@@ -49,10 +48,8 @@ def health_check():
     count = vector_store.count()
     return HealthResponse(
         status="healthy",
-        service="DeepShop AI Concierge RAG API",
-        chunks_indexed=count,
-        provider=LLM_PROVIDER,
-        model=OPENAI_MODEL
+        service="DeepShop AI Service",
+        chunks_indexed=count
     )
 
 @router.get("/suggestions")
@@ -292,3 +289,49 @@ def trigger_ingestion():
     except Exception as e:
         logger.error(f"Ingestion failed: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Ingestion failed: {str(e)}")
+
+
+class AnalyticsAskRequest(BaseModel):
+    question: str = Field(..., description="Merchant strategic business question")
+    focusArea: Optional[str] = Field(default="general", description="Focus area: general, financial, inventory, crm, orders")
+    history: Optional[List[ChatMessage]] = Field(default=[], description="Previous conversation turns for continuation")
+    lastTopic: Optional[str] = Field(default=None, description="Last active topic for follow-up continuation")
+
+
+@router.get("/analytics/overview")
+def get_merchant_analytics_overview():
+    """
+    Computes real-time merchant statistical analytics, SKU intelligence,
+    expense burn ratios, CRM LTV rankings, and AI recommendations.
+    """
+    try:
+        data = analytics_engine.compute_overview()
+        return data
+    except Exception as e:
+        logger.error(f"Analytics overview computation failed: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Analytics computation failed: {str(e)}")
+
+
+@router.post("/analytics/ask")
+def ask_merchant_ai_advisor(req: AnalyticsAskRequest):
+    """
+    Interactive AI Business Advisor for merchants with multi-turn continuation.
+    """
+    q = req.question.strip()
+    if not q:
+        raise HTTPException(status_code=400, detail="Question cannot be empty.")
+    try:
+        history_dicts = [{"role": m.role, "content": m.content} for m in req.history] if req.history else []
+        result = analytics_engine.ask_advisor(
+            question=q,
+            focus_area=req.focusArea or "general",
+            history=history_dicts,
+            last_topic=req.lastTopic
+        )
+        logger.info(f"Merchant AI Analytics Query: '{q}' -> Topic: {result.get('focusArea')}")
+        return result
+    except Exception as e:
+        logger.error(f"Merchant AI Advisor error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to generate advisor analysis: {str(e)}")
+
+

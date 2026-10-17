@@ -60,6 +60,14 @@ class DataLoader:
         with open(filepath, "r", encoding="utf-8") as f:
             return json.load(f)
 
+    def load_expenses(self) -> List[Dict[str, Any]]:
+        """Loads operating expenses from data/expenses.json."""
+        filepath = os.path.join(self.data_dir, "expenses.json")
+        if not os.path.exists(filepath):
+            return []
+        with open(filepath, "r", encoding="utf-8") as f:
+            return json.load(f)
+
     def load_policies(self) -> str:
         """Loads store policies and knowledge from store_policies.md."""
         filepath = os.path.join(LOCAL_DATA_DIR, "store_policies.md")

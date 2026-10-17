@@ -5,7 +5,7 @@
     "orderNumber": "ORD-2026-8364",
     "trackingNumber": "TRK-DPS-5842761",
     "carrier": "Standard Ground Express",
-    "status": "pending",
+    "status": "delivered",
     "estimatedDeliveryDate": "2026-10-20",
     "updates": [
       {
@@ -13,6 +13,12 @@
         "location": "Fulfillment Center, Hub 1",
         "message": "Payment confirmed. Warehouse team preparing items for packaging.",
         "timestamp": "2026-10-17T08:06:20.009Z"
+      },
+      {
+        "status": "Status: DELIVERED",
+        "location": "Chennai, Delivery Station",
+        "message": "Consignment successfully delivered to consignee.",
+        "timestamp": "2026-10-17T11:09:17.497Z"
       }
     ],
     "createdAt": "2026-10-17T08:06:20.009Z"
@@ -31,6 +37,12 @@
         "location": "Fulfillment Center, Hub 1",
         "message": "Payment confirmed. Warehouse team preparing items for packaging.",
         "timestamp": "2026-10-17T07:37:36.203Z"
+      },
+      {
+        "status": "Status: CANCELLED",
+        "location": "Administration",
+        "message": "Order cancelled in warehouse ledger.",
+        "timestamp": "2026-10-17T11:09:32.017Z"
       }
     ],
     "createdAt": "2026-10-17T07:37:36.203Z"
