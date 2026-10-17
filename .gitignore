@@ -1,0 +1,35 @@
+# Dependencies (automatically installed on npm run dev)
+node_modules/
+**/node_modules/
+
+# Python virtual environments & cache (automatically created on npm run dev)
+venv/
+.venv/
+**/venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Build outputs (automatically built on npm run dev)
+dist/
+build/
+**/dist/
+**/build/
+
+# Vector database & runtime logs (automatically generated on startup)
+chroma_db/
+**/chroma_db/
+logs/
+**/logs/*.log
+*.log
+
+# IDE & OS files
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

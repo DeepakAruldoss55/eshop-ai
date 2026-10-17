@@ -1,0 +1,56 @@
+[
+  {
+    "id": "addr_001",
+    "customerId": "cust_001",
+    "type": "home",
+    "isDefault": true,
+    "fullName": "Deepak Aruldoss",
+    "phone": "+91 98765 43210",
+    "addressLine1": "42 Silicon Avenue, Tech Park",
+    "addressLine2": "Suite 404, Tower B",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "postalCode": "600096",
+    "country": "India"
+  },
+  {
+    "id": "addr_002",
+    "customerId": "cust_001",
+    "type": "work",
+    "isDefault": false,
+    "fullName": "Deepak Aruldoss (Office)",
+    "phone": "+91 98765 43210",
+    "addressLine1": "AI Research Innovation Labs",
+    "addressLine2": "3rd Floor, Cyber City",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "postalCode": "600113",
+    "country": "India"
+  },
+  {
+    "id": "addr_003",
+    "customerId": "cust_002",
+    "type": "home",
+    "isDefault": true,
+    "fullName": "Sara S",
+    "phone": "+1 (555) 234-5678",
+    "addressLine1": "742 Evergreen Terrace",
+    "city": "San Francisco",
+    "state": "California",
+    "postalCode": "94107",
+    "country": "United States"
+  },
+  {
+    "id": "addr_004",
+    "customerId": "cust_003",
+    "type": "home",
+    "isDefault": true,
+    "fullName": "Sharvin S",
+    "phone": "+44 7911 123456",
+    "addressLine1": "10 Downing Crescent",
+    "city": "London",
+    "state": "Greater London",
+    "postalCode": "SW1A 2AA",
+    "country": "United Kingdom"
+  }
+]

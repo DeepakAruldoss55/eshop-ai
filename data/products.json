@@ -1,0 +1,450 @@
+[
+  {
+    "id": "prod_015",
+    "title": "Apple iPhone 17 Pro Max",
+    "slug": "apple-iphone-17-pro-max",
+    "description": "Product highlights\n256 GB ROM \nA19 Chip, 6 Core Processor | Hexa Core\nSuperfast Multitasking. Extensive Gaming\n48MP + 48MP + 48MP Rear Camera\nDSLR Like Pictures & Great Zoom\n18MP Front Camera\n6.9 inch All Screen OLED Display\nCinematic Display. Sharpest Colours\n4823 mAh Battery",
+    "price": 20,
+    "categoryId": "cat_electronics",
+    "categoryName": "Smart Electronics",
+    "images": [
+      "/images/products/iphone_17_1.webp"
+    ],
+    "rating": 0,
+    "reviewCount": 0,
+    "stock": 25,
+    "featured": false,
+    "tags": [
+      "New Arrival",
+      "Flagship"
+    ],
+    "specifications": {
+      "Warranty": "1 Year Manufacturer",
+      "Condition": "Brand New In Box"
+    },
+    "createdAt": "2026-10-14T02:15:13.247Z"
+  },
+  {
+    "id": "prod_001",
+    "title": "Aura Pro Studio Wireless Headphones",
+    "slug": "aura-pro-studio-wireless-headphones",
+    "description": "Active hybrid noise cancellation, 45-hour battery life, titanium 40mm acoustic drivers, and spatial audio with dynamic head tracking.",
+    "price": 349.99,
+    "compareAtPrice": 399.99,
+    "categoryId": "cat_audio",
+    "categoryName": "Premium Audio",
+    "images": [
+      "/images/products/headphones-1.jpg",
+      "/images/products/headphones-2.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 248,
+    "stock": 35,
+    "featured": true,
+    "tags": [
+      "Best Seller",
+      "ANC",
+      "Wireless",
+      "Spatial Audio"
+    ],
+    "specifications": {
+      "Battery": "Up to 45 hours",
+      "Connectivity": "Bluetooth 5.3 + 3.5mm AUX",
+      "Weight": "250g",
+      "Drivers": "40mm Titanium Composite"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_002",
+    "title": "Titan Precision Chrono Smartwatch",
+    "slug": "titan-precision-chrono-smartwatch",
+    "description": "Aerospace-grade titanium chassis, sapphire crystal display, continuous ECG and SpO2 sensors, with 100m water resistance.",
+    "price": 499,
+    "compareAtPrice": 549,
+    "categoryId": "cat_wearables",
+    "categoryName": "Smart Wearables",
+    "images": [
+      "/images/products/smartwatch-1.jpg",
+      "/images/products/smartwatch-2.jpg"
+    ],
+    "rating": 4.8,
+    "reviewCount": 185,
+    "stock": 22,
+    "featured": true,
+    "tags": [
+      "Titanium",
+      "Waterproof",
+      "ECG",
+      "OLED"
+    ],
+    "specifications": {
+      "Case": "46mm Grade 5 Titanium",
+      "Display": "1.43\" AMOLED 1000 nits",
+      "WaterResistance": "10 ATM (100m)",
+      "Battery": "14 Days Typical Usage"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_003",
+    "title": "Lumix Infinity 4K Cinema Drone",
+    "slug": "lumix-infinity-4k-cinema-drone",
+    "description": "Ultralight folding drone equipped with 3-axis mechanical gimbal, 4K/60fps HDR video recording, and 360-degree omnidirectional obstacle sensing.",
+    "price": 899,
+    "compareAtPrice": 999,
+    "categoryId": "cat_photography",
+    "categoryName": "Cameras & Drones",
+    "images": [
+      "/images/products/drone-1.jpg",
+      "/images/products/drone-2.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 92,
+    "stock": 14,
+    "featured": true,
+    "tags": [
+      "4K 60FPS",
+      "Gimbal",
+      "Obstacle Avoidance",
+      "Pro"
+    ],
+    "specifications": {
+      "Camera": "1-inch CMOS 20MP",
+      "FlightTime": "38 minutes per battery",
+      "Range": "12 km HD Video Transmission",
+      "Weight": "249 grams"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_004",
+    "title": "NeoBook Pro 16 Carbon Ultrabook",
+    "slug": "neobook-pro-16-carbon-ultrabook",
+    "description": "Forged carbon fiber unibody with M-series architecture, 3.2K Liquid Retina ProMotion 120Hz display, and 32GB unified high-speed RAM.",
+    "price": 1899,
+    "compareAtPrice": 2099,
+    "categoryId": "cat_computing",
+    "categoryName": "Laptops & Workstations",
+    "images": [
+      "/images/products/laptop-1.jpg",
+      "/images/products/laptop-2.jpg"
+    ],
+    "rating": 5,
+    "reviewCount": 310,
+    "stock": 18,
+    "featured": true,
+    "tags": [
+      "Flagship",
+      "120Hz ProMotion",
+      "32GB RAM",
+      "Carbon Fiber"
+    ],
+    "specifications": {
+      "Display": "16.2\" Mini-LED 3456x2234 120Hz",
+      "Memory": "32GB Unified Memory",
+      "Storage": "1TB NVMe PCIe 4.0 SSD",
+      "Battery": "Up to 22 hours video playback"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_005",
+    "title": "ZenPulse ANC Wireless Earbuds",
+    "slug": "zenpulse-anc-wireless-earbuds",
+    "description": "True wireless earbuds with custom acoustic silicon tips, lossless aptX audio decoding, wireless Qi charging case, and IPX7 sweat resistance.",
+    "price": 179.99,
+    "compareAtPrice": 219.99,
+    "categoryId": "cat_audio",
+    "categoryName": "Premium Audio",
+    "images": [
+      "/images/products/earbuds-1.jpg"
+    ],
+    "rating": 4.7,
+    "reviewCount": 420,
+    "stock": 49,
+    "featured": false,
+    "tags": [
+      "Earbuds",
+      "IPX7",
+      "Lossless Audio",
+      "Qi Wireless"
+    ],
+    "specifications": {
+      "Playtime": "8h buds / 32h with charging case",
+      "Waterproofing": "IPX7 certified",
+      "Codecs": "LDAC, AAC, aptX Adaptive",
+      "Weight": "4.5g per bud"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_006",
+    "title": "Spectra Mechanical Custom Keyboard",
+    "slug": "spectra-mechanical-custom-keyboard",
+    "description": "CNC anodized 6063 aluminum case, hot-swappable lubed linear switches, south-facing per-key RGB backlighting, and gasket-mount dampening structure.",
+    "price": 169.5,
+    "compareAtPrice": 199,
+    "categoryId": "cat_computing",
+    "categoryName": "Laptops & Workstations",
+    "images": [
+      "/images/products/keyboard-1.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 164,
+    "stock": 26,
+    "featured": false,
+    "tags": [
+      "Mechanical",
+      "Gasket Mount",
+      "Hot-Swap",
+      "RGB"
+    ],
+    "specifications": {
+      "Layout": "75% Compact (82 keys)",
+      "Switches": "Gateron Oil King Factory Lubed",
+      "Connectivity": "Tri-Mode: 2.4G / BT 5.1 / Type-C",
+      "Weight": "1.45 kg"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_007",
+    "title": "PulseFit Vital Smart Band",
+    "slug": "pulsefit-vital-smart-band",
+    "description": "Ultra-slim health monitor featuring 24/7 heart rate variability, sleep cycle staging, skin temperature tracking, and seamless auto-workout detection.",
+    "price": 89.99,
+    "compareAtPrice": 109.99,
+    "categoryId": "cat_wearables",
+    "categoryName": "Smart Wearables",
+    "images": [
+      "/images/products/smartband-1.jpg"
+    ],
+    "rating": 4.6,
+    "reviewCount": 97,
+    "stock": 43,
+    "featured": false,
+    "tags": [
+      "Sleep Tracker",
+      "HRV",
+      "Lightweight",
+      "20-Day Battery"
+    ],
+    "specifications": {
+      "Sensors": "Optical PPG, Accelerometer, SpO2",
+      "Display": "1.1\" Curved AMOLED",
+      "BatteryLife": "20 days standby",
+      "WaterResistance": "5 ATM"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_008",
+    "title": "Apex Prime 65W GaN Fast Charger Trio",
+    "slug": "apex-prime-65w-gan-fast-charger",
+    "description": "Next-gen Gallium Nitride (GaN) fast charger with 2x USB-C and 1x USB-A ports. Powers laptops, tablets, and phones simultaneously in ultra-compact form factor.",
+    "price": 49.99,
+    "compareAtPrice": 59.99,
+    "categoryId": "cat_accessories",
+    "categoryName": "Minimal Accessories",
+    "images": [
+      "/images/products/charger-1.jpg"
+    ],
+    "rating": 4.8,
+    "reviewCount": 215,
+    "stock": 65,
+    "featured": false,
+    "tags": [
+      "GaN Technology",
+      "65W Fast Charge",
+      "Multi-Port",
+      "Compact"
+    ],
+    "specifications": {
+      "PowerOutput": "65W Max USB-PD 3.0",
+      "Ports": "2x Type-C (PD/PPS) + 1x Type-A (QC4+)",
+      "Size": "53 x 40 x 30 mm",
+      "Safety": "Active Temperature Guard 2.0"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_009",
+    "title": "SoundCore Horizon Hi-Res Speaker",
+    "slug": "soundcore-horizon-hi-res-speaker",
+    "description": "Room-filling 360-degree acoustic dispersion with dual passive radiators, brushed aircraft aluminum housing, and 24-hour party playback.",
+    "price": 199.99,
+    "compareAtPrice": 249.99,
+    "categoryId": "cat_audio",
+    "categoryName": "Premium Audio",
+    "images": [
+      "/images/products/speaker-1.jpg"
+    ],
+    "rating": 4.7,
+    "reviewCount": 140,
+    "stock": 30,
+    "featured": false,
+    "tags": [
+      "Hi-Res Audio",
+      "IP67 Waterproof",
+      "Aluminum",
+      "Bass Boost"
+    ],
+    "specifications": {
+      "Output": "60W RMS Dual Drivers",
+      "FrequencyResponse": "40Hz - 20kHz",
+      "Bluetooth": "5.3 with Stereo Pairing Mode",
+      "Battery": "7800mAh (24 hours)"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_010",
+    "title": "Alpha One 8K Mirrorless Body",
+    "slug": "alpha-one-8k-mirrorless-body",
+    "description": "Full-frame 50.1-megapixel Exmor sensor, 30fps black-out free continuous shooting, 8K 30p and 4K 120p video recording with Real-time Eye AF.",
+    "price": 3299,
+    "compareAtPrice": 3500,
+    "categoryId": "cat_photography",
+    "categoryName": "Cameras & Drones",
+    "images": [
+      "/images/products/camera-1.jpg"
+    ],
+    "rating": 5,
+    "reviewCount": 68,
+    "stock": 8,
+    "featured": true,
+    "tags": [
+      "8K Video",
+      "Full-Frame",
+      "50.1MP",
+      "Cinematic"
+    ],
+    "specifications": {
+      "Sensor": "35mm Full-Frame 50.1 MP CMOS",
+      "Autofocus": "759 phase-detection points",
+      "ISO": "100-32000 (expandable 50-102400)",
+      "Stabilization": "5.5-step 5-axis in-body IS"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_011",
+    "title": "AeroGlide Ergonomic Wireless Mouse",
+    "slug": "aeroglide-ergonomic-wireless-mouse",
+    "description": "Precision sculpted mouse engineered for natural wrist alignment, whisper-quiet magnetic scroll wheel, and 8,000 DPI Darkfield glass sensor.",
+    "price": 99,
+    "compareAtPrice": 119,
+    "categoryId": "cat_computing",
+    "categoryName": "Laptops & Workstations",
+    "images": [
+      "/images/products/mouse-1.jpg"
+    ],
+    "rating": 4.8,
+    "reviewCount": 388,
+    "stock": 42,
+    "featured": false,
+    "tags": [
+      "Ergonomic",
+      "Magnetic Scroll",
+      "8K DPI",
+      "Multi-Device"
+    ],
+    "specifications": {
+      "Sensor": "8000 DPI Darkfield Glass Tracking",
+      "Battery": "Up to 70 days per single charge",
+      "Buttons": "7 customizable macro buttons",
+      "Weight": "141g"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_012",
+    "title": "DeepShop Glass Wireless Stand",
+    "slug": "deepshop-glass-wireless-stand",
+    "description": "Sleek brushed space-gray aluminum and frosted tempered glass 3-in-1 stand for fast wireless charging of your smartphone, watch, and earbuds.",
+    "price": 79.99,
+    "compareAtPrice": 99.99,
+    "categoryId": "cat_accessories",
+    "categoryName": "Minimal Accessories",
+    "images": [
+      "/images/products/magsafe-stand-1.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 172,
+    "stock": 37,
+    "featured": false,
+    "tags": [
+      "MagSafe 15W",
+      "3-in-1",
+      "Tempered Glass",
+      "Minimal"
+    ],
+    "specifications": {
+      "Input": "Type-C 30W Power Adapter",
+      "Output": "15W Phone + 5W Watch + 5W Buds",
+      "Material": "CNC Aluminum + Tempered Glass",
+      "Weight": "320g weighted base"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_013",
+    "title": "Horizon Curved 34-inch OLED Monitor",
+    "slug": "horizon-curved-34-inch-oled-monitor",
+    "description": "Quantum Dot OLED panel, 175Hz refresh rate with lightning 0.03ms response time, HDR TrueBlack 400, and integrated 90W USB-C hub.",
+    "price": 999,
+    "compareAtPrice": 1199,
+    "categoryId": "cat_electronics",
+    "categoryName": "Smart Electronics",
+    "images": [
+      "/images/products/curved-monitor-1.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 114,
+    "stock": 0,
+    "featured": true,
+    "tags": [
+      "QD-OLED",
+      "175Hz",
+      "Ultrawide 21:9",
+      "HDR True Black"
+    ],
+    "specifications": {
+      "Resolution": "3440 x 1440 UWQHD (1800R Curve)",
+      "Panel": "Quantum Dot OLED",
+      "RefreshRate": "175 Hz G-Sync Compatible",
+      "Ports": "2x DP 1.4, 1x HDMI 2.1, 1x USB-C 90W"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  },
+  {
+    "id": "prod_014",
+    "title": "DeepShop Smart Home Hub Pro",
+    "slug": "deepshop-smart-home-hub-pro",
+    "description": "Thread, Matter, and Zigbee 3.0 universal smart controller with 8-inch high-resolution touch panel and integrated far-field voice recognition.",
+    "price": 149,
+    "compareAtPrice": 179,
+    "categoryId": "cat_electronics",
+    "categoryName": "Smart Electronics",
+    "images": [
+      "/images/products/smarthome-hub-1.jpg"
+    ],
+    "rating": 4.7,
+    "reviewCount": 88,
+    "stock": 25,
+    "featured": false,
+    "tags": [
+      "Matter Standard",
+      "Thread Border Router",
+      "Touch Hub"
+    ],
+    "specifications": {
+      "Connectivity": "Wi-Fi 6, Thread, Zigbee, Bluetooth 5.2",
+      "Display": "8.0\" IPS Touchscreen",
+      "Microphones": "4x Far-Field Beamforming",
+      "Audio": "Stereo 10W Neodymium Drivers"
+    },
+    "createdAt": "2026-10-12T16:31:41.916Z"
+  }
+]

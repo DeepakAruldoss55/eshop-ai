@@ -1,0 +1,18 @@
+{
+  "name": "eshop-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "bash -c '([ -d node_modules/concurrently ] || npm install --no-audit --no-fund) && ([ -d server/node_modules ] || npm --prefix server install --no-audit --no-fund) && ([ -d client/node_modules ] || npm --prefix client install --no-audit --no-fund) && ([ -d server/dist ] || npm --prefix server run build) && ([ -d client/dist ] || npm --prefix client run build)'",
+    "predev": "npm run setup",
+    "dev": "concurrently -n \"SERVER,CLIENT,AI\" -c \"blue,green,magenta\" \"npm --prefix server run dev\" \"npm --prefix client run dev\" \"npm --prefix ai-service run dev\"",
+    "build": "npm --prefix server run build && npm --prefix client run build",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "dev:ai": "npm --prefix ai-service run dev",
+    "seed": "npm --prefix server run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

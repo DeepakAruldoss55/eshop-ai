@@ -1,0 +1,32 @@
+app:
+  name: "DeepShop AI Concierge API"
+  version: "1.0.0"
+  description: "RAG-powered conversational API for DeepShop E-Commerce"
+
+retrieval:
+  top_k: 4
+  distance_threshold: 1.2
+  collection_name: "deepshop_knowledge"
+  embedding_model: "deepshop-lightweight-384"
+
+chunking:
+  product_chunk_size: 500
+  policy_chunk_size: 400
+  chunk_overlap: 50
+
+llm:
+  temperature: 0.3
+  max_tokens: 450
+  timeout_seconds: 10
+  candidate_models:
+    - "qwen/qwen3.8-27b"
+    - "openai/gpt-oss-120b"
+    - "openai/gpt-oss-20b"
+    - "llama-3.3-70b-versatile"
+
+store:
+  name: "DeepShop"
+  currency: "USD ($)"
+  free_shipping_threshold: 200
+  warranty_years: 2
+  return_days: 30

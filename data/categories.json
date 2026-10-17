@@ -1,0 +1,50 @@
+[
+  {
+    "id": "cat_electronics",
+    "name": "Smart Electronics",
+    "slug": "electronics",
+    "description": "Next-generation gadgets, flagship smartphones, and ultra-high-definition displays.",
+    "image": "/images/categories/electronics.jpg",
+    "productCount": 4
+  },
+  {
+    "id": "cat_audio",
+    "name": "Premium Audio",
+    "slug": "audio",
+    "description": "Noise-canceling headphones, studio monitors, and portable wireless speakers.",
+    "image": "/images/categories/audio.jpg",
+    "productCount": 4
+  },
+  {
+    "id": "cat_wearables",
+    "name": "Smart Wearables",
+    "slug": "wearables",
+    "description": "Fitness trackers, luxury smartwatches, and modern biometric health companions.",
+    "image": "/images/categories/wearables.jpg",
+    "productCount": 3
+  },
+  {
+    "id": "cat_computing",
+    "name": "Laptops & Workstations",
+    "slug": "computing",
+    "description": "Powerhouse ultrabooks, mechanical keyboards, and precision ergonomic mice.",
+    "image": "/images/categories/computing.jpg",
+    "productCount": 3
+  },
+  {
+    "id": "cat_photography",
+    "name": "Cameras & Drones",
+    "slug": "photography",
+    "description": "Mirrorless cameras, 4K aerial drones, and professional cinematic lenses.",
+    "image": "/images/categories/photography.jpg",
+    "productCount": 2
+  },
+  {
+    "id": "cat_accessories",
+    "name": "Minimal Accessories",
+    "slug": "accessories",
+    "description": "MagSafe charging docks, premium leather cases, and aluminum desk stands.",
+    "image": "/images/categories/accessories.jpg",
+    "productCount": 2
+  }
+]

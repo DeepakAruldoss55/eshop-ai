@@ -1,0 +1,11 @@
+{
+  "name": "deepshop-ai-service",
+  "version": "1.0.0",
+  "description": "FastAPI RAG AI Concierge Service for DeepShop",
+  "private": true,
+  "scripts": {
+    "dev": "bash run.sh",
+    "ingest": "bash -c 'source venv/bin/activate && python ingest.py'",
+    "test": "bash -c 'source venv/bin/activate && python -m unittest discover tests'"
+  }
+}

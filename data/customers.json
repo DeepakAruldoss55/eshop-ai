@@ -1,0 +1,29 @@
+[
+  {
+    "id": "cust_001",
+    "firstName": "Deepak",
+    "lastName": "Aruldoss",
+    "email": "deepak.a@example.com",
+    "phone": "+91 98765 43210",
+    "avatar": "/images/customers/customer-1.jpeg",
+    "createdAt": "2026-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "cust_002",
+    "firstName": "Sara",
+    "lastName": "S",
+    "email": "sara.s@example.com",
+    "phone": "+1 (555) 234-5678",
+    "avatar": "/images/customers/customer-2.jpg",
+    "createdAt": "2026-02-10T14:30:00.000Z"
+  },
+  {
+    "id": "cust_003",
+    "firstName": "Sharvin",
+    "lastName": "S",
+    "email": "sharvin.s@example.com",
+    "phone": "+44 7911 123456",
+    "avatar": "/images/customers/customer-3.jpg",
+    "createdAt": "2026-03-01T09:15:00.000Z"
+  }
+]

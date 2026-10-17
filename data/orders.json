@@ -1,0 +1,351 @@
+[
+  {
+    "id": "order_16dd99bf",
+    "orderNumber": "ORD-2026-8364",
+    "customerId": "cust_001",
+    "customerName": "Deepak Aruldoss",
+    "customerEmail": "deepak.a@example.com",
+    "customerPhone": "+91 98765 43210",
+    "items": [
+      {
+        "productId": "prod_006",
+        "title": "Spectra Mechanical Custom Keyboard",
+        "price": 169.5,
+        "quantity": 1,
+        "image": "/images/products/keyboard-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_001",
+      "customerId": "cust_001",
+      "type": "home",
+      "isDefault": true,
+      "fullName": "Deepak Aruldoss",
+      "phone": "+91 98765 43210",
+      "addressLine1": "42 Silicon Avenue, Tech Park",
+      "addressLine2": "Suite 404, Tower B",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "postalCode": "600096",
+      "country": "India"
+    },
+    "shippingMethod": {
+      "id": "ship_standard",
+      "name": "Standard Carbon-Neutral",
+      "description": "Eco-friendly ground delivery in 3-5 business days",
+      "cost": 0,
+      "estimatedDeliveryDays": "3-5 Days"
+    },
+    "subtotal": 169.5,
+    "shippingFee": 0,
+    "tax": 13.56,
+    "totalAmount": 183.06,
+    "status": "processing",
+    "paymentMethod": "upi",
+    "paymentStatus": "paid",
+    "createdAt": "2026-10-17T08:06:20.003Z",
+    "trackingNumber": "TRK-DPS-5842761"
+  },
+  {
+    "id": "order_298bac10",
+    "orderNumber": "ORD-2026-7975",
+    "customerId": "cust_001",
+    "customerName": "Deepak Aruldoss",
+    "customerEmail": "deepak.a@example.com",
+    "customerPhone": "+91 98765 43210",
+    "items": [
+      {
+        "productId": "prod_007",
+        "title": "PulseFit Vital Smart Band",
+        "price": 89.99,
+        "quantity": 1,
+        "image": "/images/products/smartband-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_001",
+      "customerId": "cust_001",
+      "type": "home",
+      "isDefault": true,
+      "fullName": "Deepak Aruldoss",
+      "phone": "+91 98765 43210",
+      "addressLine1": "42 Silicon Avenue, Tech Park",
+      "addressLine2": "Suite 404, Tower B",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "postalCode": "600096",
+      "country": "India"
+    },
+    "shippingMethod": {
+      "id": "ship_standard",
+      "name": "Standard Carbon-Neutral",
+      "description": "Eco-friendly ground delivery in 3-5 business days",
+      "cost": 0,
+      "estimatedDeliveryDays": "3-5 Days"
+    },
+    "subtotal": 89.99,
+    "shippingFee": 0,
+    "tax": 7.2,
+    "totalAmount": 97.19,
+    "status": "processing",
+    "paymentMethod": "upi",
+    "paymentStatus": "paid",
+    "createdAt": "2026-10-17T07:37:36.190Z",
+    "trackingNumber": "TRK-DPS-9771450"
+  },
+  {
+    "id": "order_8e330738",
+    "orderNumber": "ORD-2026-3923",
+    "customerId": "cust_001",
+    "customerName": "Deepak Aruldoss",
+    "customerEmail": "deepak.a@example.com",
+    "customerPhone": "+91 98765 43210",
+    "items": [
+      {
+        "productId": "prod_012",
+        "title": "DeepShop Glass Wireless Stand",
+        "price": 79.99,
+        "quantity": 1,
+        "image": "/images/products/magsafe-stand-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_001",
+      "customerId": "cust_001",
+      "type": "home",
+      "isDefault": true,
+      "fullName": "Deepak Aruldoss",
+      "phone": "+91 98765 43210",
+      "addressLine1": "42 Silicon Avenue, Tech Park",
+      "addressLine2": "Suite 404, Tower B",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "postalCode": "600096",
+      "country": "India"
+    },
+    "shippingMethod": {
+      "id": "ship_standard",
+      "name": "Standard Carbon-Neutral",
+      "description": "Eco-friendly ground delivery in 3-5 business days",
+      "cost": 0,
+      "estimatedDeliveryDays": "3-5 Days"
+    },
+    "subtotal": 79.99,
+    "shippingFee": 0,
+    "tax": 6.4,
+    "totalAmount": 86.39,
+    "status": "delivered",
+    "paymentMethod": "upi",
+    "paymentStatus": "paid",
+    "createdAt": "2026-10-17T05:35:16.186Z",
+    "trackingNumber": "TRK-DPS-4557260"
+  },
+  {
+    "id": "order_24e58112",
+    "orderNumber": "ORD-2026-5054",
+    "customerId": "cust_001",
+    "customerName": "Deepak Aruldoss",
+    "customerEmail": "deepak.a@example.com",
+    "customerPhone": "+91 98765 43210",
+    "items": [
+      {
+        "productId": "prod_013",
+        "title": "Horizon Curved 34-inch OLED Monitor",
+        "price": 999,
+        "quantity": 12,
+        "image": "/images/products/curved-monitor-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_001",
+      "customerId": "cust_001",
+      "type": "home",
+      "isDefault": true,
+      "fullName": "Deepak Aruldoss",
+      "phone": "+91 98765 43210",
+      "addressLine1": "42 Silicon Avenue, Tech Park",
+      "addressLine2": "Suite 404, Tower B",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "postalCode": "600096",
+      "country": "India"
+    },
+    "shippingMethod": {
+      "id": "ship_standard",
+      "name": "Standard Carbon-Neutral",
+      "description": "Eco-friendly ground delivery in 3-5 business days",
+      "cost": 0,
+      "estimatedDeliveryDays": "3-5 Days"
+    },
+    "subtotal": 11988,
+    "shippingFee": 0,
+    "tax": 959.04,
+    "totalAmount": 12947.04,
+    "status": "shipped",
+    "paymentMethod": "upi",
+    "paymentStatus": "paid",
+    "createdAt": "2026-10-13T03:10:45.728Z",
+    "trackingNumber": "TRK-DPS-4589741"
+  },
+  {
+    "id": "order_73ae69d6",
+    "orderNumber": "ORD-2026-8310",
+    "customerId": "cust_001",
+    "customerName": "Deepak Aruldoss",
+    "customerEmail": "deepak.a@example.com",
+    "customerPhone": "+91 98765 43210",
+    "items": [
+      {
+        "productId": "prod_005",
+        "title": "ZenPulse ANC Wireless Earbuds",
+        "price": 179.99,
+        "quantity": 1,
+        "image": "/images/products/earbuds-1.jpg"
+      },
+      {
+        "productId": "prod_006",
+        "title": "Spectra Mechanical Custom Keyboard",
+        "price": 169.5,
+        "quantity": 1,
+        "image": "/images/products/keyboard-1.jpg"
+      },
+      {
+        "productId": "prod_007",
+        "title": "PulseFit Vital Smart Band",
+        "price": 89.99,
+        "quantity": 1,
+        "image": "/images/products/smartband-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_002",
+      "customerId": "cust_001",
+      "type": "work",
+      "isDefault": false,
+      "fullName": "Deepak Aruldoss (Office)",
+      "phone": "+91 98765 43210",
+      "addressLine1": "AI Research Innovation Labs",
+      "addressLine2": "3rd Floor, Cyber City",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "postalCode": "600113",
+      "country": "India"
+    },
+    "shippingMethod": {
+      "id": "ship_standard",
+      "name": "Standard Carbon-Neutral",
+      "description": "Eco-friendly ground delivery in 3-5 business days",
+      "cost": 0,
+      "estimatedDeliveryDays": "3-5 Days"
+    },
+    "subtotal": 439.48,
+    "shippingFee": 0,
+    "tax": 35.16,
+    "totalAmount": 474.64,
+    "status": "delivered",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "createdAt": "2026-10-12T16:49:11.512Z",
+    "trackingNumber": "TRK-DPS-6450071"
+  },
+  {
+    "id": "order_1001",
+    "orderNumber": "ORD-2026-8941",
+    "customerId": "cust_001",
+    "customerName": "Deepak Aruldoss",
+    "customerEmail": "deepak.a@example.com",
+    "customerPhone": "+91 98765 43210",
+    "items": [
+      {
+        "productId": "prod_001",
+        "title": "Aura Pro Studio Wireless Headphones",
+        "price": 349.99,
+        "quantity": 1,
+        "image": "/images/products/headphones-1.jpg"
+      },
+      {
+        "productId": "prod_008",
+        "title": "Apex Prime 65W GaN Fast Charger Trio",
+        "price": 49.99,
+        "quantity": 1,
+        "image": "/images/products/charger-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_001",
+      "customerId": "cust_001",
+      "type": "home",
+      "isDefault": true,
+      "fullName": "Deepak Aruldoss",
+      "phone": "+91 98765 43210",
+      "addressLine1": "42 Silicon Avenue, Tech Park",
+      "addressLine2": "Suite 404, Tower B",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "postalCode": "600096",
+      "country": "India"
+    },
+    "shippingMethod": {
+      "id": "ship_express",
+      "name": "Express Priority Dispatch",
+      "description": "Guaranteed 24-48 hours delivery with GPS tracking",
+      "cost": 15,
+      "estimatedDeliveryDays": "1-2 Days"
+    },
+    "subtotal": 399.98,
+    "shippingFee": 15,
+    "tax": 32,
+    "totalAmount": 446.98,
+    "status": "on_the_way",
+    "paymentMethod": "upi",
+    "paymentStatus": "paid",
+    "createdAt": "2026-04-10T11:20:00.000Z",
+    "trackingNumber": "TRK-DPS-9832410"
+  },
+  {
+    "id": "order_1002",
+    "orderNumber": "ORD-2026-7712",
+    "customerId": "cust_002",
+    "customerName": "Sara S",
+    "customerEmail": "sara.s@example.com",
+    "customerPhone": "+1 (555) 234-5678",
+    "items": [
+      {
+        "productId": "prod_002",
+        "title": "Titan Precision Chrono Smartwatch",
+        "price": 499,
+        "quantity": 1,
+        "image": "/images/products/smartwatch-1.jpg"
+      }
+    ],
+    "shippingAddress": {
+      "id": "addr_003",
+      "customerId": "cust_002",
+      "type": "home",
+      "isDefault": true,
+      "fullName": "Sara S",
+      "phone": "+1 (555) 234-5678",
+      "addressLine1": "742 Evergreen Terrace",
+      "city": "San Francisco",
+      "state": "California",
+      "postalCode": "94107",
+      "country": "United States"
+    },
+    "shippingMethod": {
+      "id": "ship_standard",
+      "name": "Standard Carbon-Neutral",
+      "description": "Eco-friendly ground delivery in 3-5 business days",
+      "cost": 0,
+      "estimatedDeliveryDays": "3-5 Days"
+    },
+    "subtotal": 499,
+    "shippingFee": 0,
+    "tax": 42.41,
+    "totalAmount": 541.41,
+    "status": "delivered",
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "createdAt": "2026-04-05T08:45:00.000Z",
+    "trackingNumber": "TRK-DPS-6541298"
+  }
+]

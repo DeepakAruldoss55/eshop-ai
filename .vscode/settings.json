@@ -1,0 +1,8 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/ai-service/venv/bin/python",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/ai-service",
+    "${workspaceFolder}/ai-service/venv/lib/python3.10/site-packages"
+  ],
+  "python.analysis.diagnosticsSource": "Pylance + Pyrefly"
+}
