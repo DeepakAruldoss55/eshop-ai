@@ -1,7 +1,7 @@
 # DeepShop AI Service — Technical Architecture & Pipeline Execution Flow
 
 **Service Name:** DeepShop AI Service  
-**Location:** `/var/www/deepak_a/ai/eshop/ai-service`  
+**Location:** `ai-service/`  
 **Core Technologies:** Python 3.10+, FastAPI, Pydantic v2, ChromaDB, Uvicorn, Requests  
 **Target Roles:** Developers, Evaluators, and Technical Presenters  
 **Focus:** Technical pipeline flows, function call chains, data flow, and file-by-file execution logic.
@@ -110,8 +110,8 @@ This pipeline runs every time a shopper opens the chat assistant on the storefro
    • Function: routes.py checks regex: r"ORD-[0-9]{4}-[0-9]+" and r"TRK-[A-Z0-9-]+"
    • Match Found: 'ORD-2026-3923'
    • Action: Calls loader.get_customer_orders(customer_id="cust_001")
-   • Reads from disk: /var/www/deepak_a/ai/eshop/server/data/orders.json
-   • Reads from disk: /var/www/deepak_a/ai/eshop/server/data/shipping.json
+   • Reads from disk: server/data/orders.json
+   • Reads from disk: server/data/shipping.json
    • Status Check: Detects current status is "DELIVERED" on 2026-10-17 in Chennai.
    • Creates [LIVE DATABASE UPDATE] context block so the LLM knows the current delivery state.
        │
