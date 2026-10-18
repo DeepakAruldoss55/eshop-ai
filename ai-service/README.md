@@ -6,6 +6,8 @@ This microservice powers two core AI capabilities across the DeepShop platform:
 1. **DeepShop AI Concierge (Customer Storefront Assistant)** — Real-time order & shipment tracking, semantic product search with interactive product cards, shopping cart inspection, and store policy Q&A.
 2. **AI Analytics & Business Copilot (Admin ERP Intelligence)** — Real-time P&L & executive KPI synthesis, SKU velocity and price-anomaly detection, dead-stock capital lockup analysis, customer LTV segmentation, and a multi-turn conversational Business Copilot for merchants.
 
+> 📖 **Comprehensive Project & Technical Documentation**: For the in-depth system architecture, mathematical formulas, embedding algorithms, failover mechanics, and live demo script, see [**`TECHNICAL_DOCUMENTATION.md`**](file:///var/www/deepak_a/ai/eshop/ai-service/TECHNICAL_DOCUMENTATION.md).
+
 ---
 
 ## 🚀 Technology Stack
